@@ -1,0 +1,10 @@
+{
+  "file_mapping": {
+    "1": [
+      "/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/diffusion_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1.cif.gz"
+    ]
+  },
+  "total_files": 1,
+  "n_jobs": 1,
+  "job_name": "mpnn"
+}

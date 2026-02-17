@@ -1,0 +1,22 @@
+{
+    "CLR_RAMP1_test": {
+        "dialect": 2,
+        "input": "/work3/marhr/Projects/dbl/CLR_RAMP1/exp_01/inputs/6e3y_cut.pdb",
+        "contig": "50-150,/0,B33-54,10,B64-106,3,B110-200,/0,C29-120",
+        "length": "298-398",
+        "redesign_motif_sidechains": false,
+        "select_hotspots": {
+            "B33": "NE2",
+            "B72": "NE1,CD1,CD2,CG,CE3,CZ2,CZ3",
+            "B92": "CD2,CD1,CE1,CE2,CZ"
+        },
+        "select_hbond_donor": {
+            "B38": "NH1,NH2"
+        },
+        "select_hbond_acceptor": {
+            "B90": "OD1,OD2",
+            "B94": "OD1,OD2"
+        },
+        "infer_ori_strategy": "hotspots"
+    }
+}

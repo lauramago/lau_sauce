@@ -1,0 +1,220 @@
+Loaded module: cuda/12.4
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+INFO:modelhub.inference_engines.rf3:[rank: 0] Loading checkpoint from /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Seeding everything with seed=1...
+Seed set to 1
+INFO:modelhub.inference_engines.rf3:[rank: 0] Instantiating trainer...
+Using bfloat16 Automatic Mixed Precision (AMP)
+INFO:modelhub.metrics.base:[rank: 0] Adding metric ptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric iptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric count_clashing_chains to the validation metrics...
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+INFO:modelhub.inference_engines.rf3:[rank: 0] Spawning 1 processes from 0...
+INFO:modelhub.trainers.rf3:[rank: 0] Instantiating model...
+INFO:modelhub.trainers.rf3:[rank: 0] Wrapping model with EMA...
+INFO:modelhub.trainers.fabric:[rank: 0] Loading checkpoint from: /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping optimizer loading...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping scheduler loading...
+INFO:modelhub.trainers.fabric:[rank: 0] Loaded checkpoint. Current epoch: 672, global step: 54014
+INFO:modelhub.inference_engines.rf3:[rank: 0] Building Transform pipeline...
+INFO:modelhub.inference_engines.rf3:[rank: 0] Using the settings from the first validation dataset: af3_validation.
+WARNING:modelhub.data.ground_truth_template:No chain types allowed; no conditioning will be given.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Found 1 structures to predict!
+INFO:modelhub.inference_engines.rf3:[rank: 0] Predicting structure 1/1: CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1.cif
+INFO:modelhub.inference_engines.rf3:[rank: 0] Parsing from path: /tmp/tmpaumytoxu/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1.cif
+INFO:root:Selected 3775 atoms for token-level templating with 2 syntaxes
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/atomworks/ml/transforms/atom_frames.py:387: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  is_protein[atom_array.token_id.astype(np.int32)]
+[rank0]:W0110 17:37:36.718000 2576030 conda_envs/rf3-env/lib/python3.12/site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+INFO:root:Annotated PLDDT scores into B-factors for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1. Forcing one model per file to accommodate separate b_factors in each model.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Confidence metrics for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1.score.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Outputs for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id1!
+Loaded module: cuda/12.4
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+INFO:modelhub.inference_engines.rf3:[rank: 0] Loading checkpoint from /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Seeding everything with seed=1...
+Seed set to 1
+INFO:modelhub.inference_engines.rf3:[rank: 0] Instantiating trainer...
+Using bfloat16 Automatic Mixed Precision (AMP)
+INFO:modelhub.metrics.base:[rank: 0] Adding metric ptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric iptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric count_clashing_chains to the validation metrics...
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+INFO:modelhub.inference_engines.rf3:[rank: 0] Spawning 1 processes from 0...
+INFO:modelhub.trainers.rf3:[rank: 0] Instantiating model...
+INFO:modelhub.trainers.rf3:[rank: 0] Wrapping model with EMA...
+INFO:modelhub.trainers.fabric:[rank: 0] Loading checkpoint from: /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping optimizer loading...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping scheduler loading...
+INFO:modelhub.trainers.fabric:[rank: 0] Loaded checkpoint. Current epoch: 672, global step: 54014
+INFO:modelhub.inference_engines.rf3:[rank: 0] Building Transform pipeline...
+INFO:modelhub.inference_engines.rf3:[rank: 0] Using the settings from the first validation dataset: af3_validation.
+WARNING:modelhub.data.ground_truth_template:No chain types allowed; no conditioning will be given.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Found 1 structures to predict!
+INFO:modelhub.inference_engines.rf3:[rank: 0] Predicting structure 1/1: CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2.cif
+INFO:modelhub.inference_engines.rf3:[rank: 0] Parsing from path: /tmp/tmpwrwo8byz/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2.cif
+INFO:root:Selected 3775 atoms for token-level templating with 2 syntaxes
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/atomworks/ml/transforms/atom_frames.py:387: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  is_protein[atom_array.token_id.astype(np.int32)]
+[rank0]:W0110 17:39:07.197000 2577700 conda_envs/rf3-env/lib/python3.12/site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+INFO:root:Annotated PLDDT scores into B-factors for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2. Forcing one model per file to accommodate separate b_factors in each model.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Confidence metrics for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2.score.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Outputs for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id2!
+Loaded module: cuda/12.4
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+INFO:modelhub.inference_engines.rf3:[rank: 0] Loading checkpoint from /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Seeding everything with seed=1...
+Seed set to 1
+INFO:modelhub.inference_engines.rf3:[rank: 0] Instantiating trainer...
+Using bfloat16 Automatic Mixed Precision (AMP)
+INFO:modelhub.metrics.base:[rank: 0] Adding metric ptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric iptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric count_clashing_chains to the validation metrics...
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+INFO:modelhub.inference_engines.rf3:[rank: 0] Spawning 1 processes from 0...
+INFO:modelhub.trainers.rf3:[rank: 0] Instantiating model...
+INFO:modelhub.trainers.rf3:[rank: 0] Wrapping model with EMA...
+INFO:modelhub.trainers.fabric:[rank: 0] Loading checkpoint from: /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping optimizer loading...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping scheduler loading...
+INFO:modelhub.trainers.fabric:[rank: 0] Loaded checkpoint. Current epoch: 672, global step: 54014
+INFO:modelhub.inference_engines.rf3:[rank: 0] Building Transform pipeline...
+INFO:modelhub.inference_engines.rf3:[rank: 0] Using the settings from the first validation dataset: af3_validation.
+WARNING:modelhub.data.ground_truth_template:No chain types allowed; no conditioning will be given.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Found 1 structures to predict!
+INFO:modelhub.inference_engines.rf3:[rank: 0] Predicting structure 1/1: CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3.cif
+INFO:modelhub.inference_engines.rf3:[rank: 0] Parsing from path: /tmp/tmp4wjos_qx/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3.cif
+INFO:root:Selected 3775 atoms for token-level templating with 2 syntaxes
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/atomworks/ml/transforms/atom_frames.py:387: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  is_protein[atom_array.token_id.astype(np.int32)]
+[rank0]:W0110 17:40:33.774000 2578286 conda_envs/rf3-env/lib/python3.12/site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+INFO:root:Annotated PLDDT scores into B-factors for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3. Forcing one model per file to accommodate separate b_factors in each model.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Confidence metrics for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3.score.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Outputs for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id3!
+Loaded module: cuda/12.4
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+INFO:modelhub.inference_engines.rf3:[rank: 0] Loading checkpoint from /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Seeding everything with seed=1...
+Seed set to 1
+INFO:modelhub.inference_engines.rf3:[rank: 0] Instantiating trainer...
+Using bfloat16 Automatic Mixed Precision (AMP)
+INFO:modelhub.metrics.base:[rank: 0] Adding metric ptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric iptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric count_clashing_chains to the validation metrics...
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+INFO:modelhub.inference_engines.rf3:[rank: 0] Spawning 1 processes from 0...
+INFO:modelhub.trainers.rf3:[rank: 0] Instantiating model...
+INFO:modelhub.trainers.rf3:[rank: 0] Wrapping model with EMA...
+INFO:modelhub.trainers.fabric:[rank: 0] Loading checkpoint from: /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping optimizer loading...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping scheduler loading...
+INFO:modelhub.trainers.fabric:[rank: 0] Loaded checkpoint. Current epoch: 672, global step: 54014
+INFO:modelhub.inference_engines.rf3:[rank: 0] Building Transform pipeline...
+INFO:modelhub.inference_engines.rf3:[rank: 0] Using the settings from the first validation dataset: af3_validation.
+WARNING:modelhub.data.ground_truth_template:No chain types allowed; no conditioning will be given.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Found 1 structures to predict!
+INFO:modelhub.inference_engines.rf3:[rank: 0] Predicting structure 1/1: CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4.cif
+INFO:modelhub.inference_engines.rf3:[rank: 0] Parsing from path: /tmp/tmpmulrsq_z/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4.cif
+INFO:root:Selected 3775 atoms for token-level templating with 2 syntaxes
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/atomworks/ml/transforms/atom_frames.py:387: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  is_protein[atom_array.token_id.astype(np.int32)]
+[rank0]:W0110 17:42:00.573000 2579819 conda_envs/rf3-env/lib/python3.12/site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+INFO:root:Annotated PLDDT scores into B-factors for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4. Forcing one model per file to accommodate separate b_factors in each model.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Confidence metrics for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4.score.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Outputs for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4!
+Loaded module: cuda/12.4
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'repr' attribute with value False was provided to the `Field()` function, which has no effect in the context it was used. 'repr' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:2249: UnsupportedFieldAttributeWarning: The 'frozen' attribute with value True was provided to the `Field()` function, which has no effect in the context it was used. 'frozen' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+  warnings.warn(
+INFO:modelhub.inference_engines.rf3:[rank: 0] Loading checkpoint from /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+WARNING:atomworks.io:We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Seeding everything with seed=1...
+Seed set to 1
+INFO:modelhub.inference_engines.rf3:[rank: 0] Instantiating trainer...
+Using bfloat16 Automatic Mixed Precision (AMP)
+INFO:modelhub.metrics.base:[rank: 0] Adding metric ptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric iptm to the validation metrics...
+INFO:modelhub.metrics.base:[rank: 0] Adding metric count_clashing_chains to the validation metrics...
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/torch/__init__.py:1551: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+You are using a CUDA device ('NVIDIA A100-PCIE-40GB') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+INFO:modelhub.inference_engines.rf3:[rank: 0] Spawning 1 processes from 0...
+INFO:modelhub.trainers.rf3:[rank: 0] Instantiating model...
+INFO:modelhub.trainers.rf3:[rank: 0] Wrapping model with EMA...
+INFO:modelhub.trainers.fabric:[rank: 0] Loading checkpoint from: /dtu/projects/dbl/rf3/release/ckpt/rf3_latest.pt...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping optimizer loading...
+WARNING:modelhub.trainers.fabric:[rank: 0] Skipping scheduler loading...
+INFO:modelhub.trainers.fabric:[rank: 0] Loaded checkpoint. Current epoch: 672, global step: 54014
+INFO:modelhub.inference_engines.rf3:[rank: 0] Building Transform pipeline...
+INFO:modelhub.inference_engines.rf3:[rank: 0] Using the settings from the first validation dataset: af3_validation.
+WARNING:modelhub.data.ground_truth_template:No chain types allowed; no conditioning will be given.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Found 1 structures to predict!
+INFO:modelhub.inference_engines.rf3:[rank: 0] Predicting structure 1/1: CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5.cif
+INFO:modelhub.inference_engines.rf3:[rank: 0] Parsing from path: /tmp/tmpd0etg0fa/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5.cif
+INFO:root:Selected 3775 atoms for token-level templating with 2 syntaxes
+/dtu/projects/dbl/rf3/release/conda_envs/rf3-env/lib/python3.12/site-packages/atomworks/ml/transforms/atom_frames.py:387: DeprecationWarning: __array_wrap__ must accept context and return_scalar arguments (positionally) in the future. (Deprecated NumPy 2.0)
+  is_protein[atom_array.token_id.astype(np.int32)]
+[rank0]:W0110 17:43:26.488000 2580376 conda_envs/rf3-env/lib/python3.12/site-packages/torch/fx/_symbolic_trace.py:52] is_fx_tracing will return true for both fx.symbolic_trace and torch.export. Please use is_fx_tracing_symbolic_tracing() for specifically fx.symbolic_trace or torch.compiler.is_compiling() for specifically torch.export/compile.
+INFO:root:Annotated PLDDT scores into B-factors for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5. Forcing one model per file to accommodate separate b_factors in each model.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Confidence metrics for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5.score.
+INFO:modelhub.inference_engines.rf3:[rank: 0] Outputs for CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5 written to /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5/CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id5!

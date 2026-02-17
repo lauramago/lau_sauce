@@ -1,0 +1,82 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27593655[1]: <rf3[1-1]> in cluster <dcc> Exited
+
+Job <rf3[1-1]> was submitted from host <hpclogin1> by user <marhr> in cluster <dcc> at Sat Jan 10 16:47:23 2026
+Job was executed on host(s) <4*n-62-18-9>, in queue <gpua100>, as user <marhr> in cluster <dcc> at Sat Jan 10 16:47:25 2026
+</zhome/6a/1/227894> was used as the home directory.
+</dtu/projects/dbl/LigandMPNN/25.3.1-0/miniforge3/bin> was used as the working directory.
+Started at Sat Jan 10 16:47:25 2026
+Terminated at Sat Jan 10 16:47:35 2026
+Results reported at Sat Jan 10 16:47:35 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q gpua100
+#BSUB -J "rf3[1-1]"
+#BSUB -n 4
+#BSUB -R "span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -W 12:00
+#BSUB -R "rusage[mem=10GB]"
+#BSUB -o /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//rf3%J.out
+#BSUB -e /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//rf3%J.err
+
+set -euo pipefail
+
+mkdir -p "/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs/"
+mkdir -p "/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/rf3_out/"
+
+module load cuda/12.4
+export RF3_PATH="/dtu/projects/dbl/rf3/release"
+source "/dtu/projects/dbl/rf3/release/activate_env.sh"
+export PYTHONPATH="${RF3_PATH}:${PYTHONPATH:-}"
+
+GROUP_SIZE=20
+CMD_FILE="/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/cmds/rf3_cmds"
+
+FIRST=$(( ($LSB_JOBINDEX - 1) * GROUP_SIZE + 1 ))
+LAST=$(( $LSB_JOBINDEX * GROUP_SIZE ))
+
+i=$FIRST
+while [ $i -le $LAST ]; do
+    CMD=$(sed -n "${i}p" "$CMD_FILE" || true)
+    if [ -z "$CMD" ]; then
+        break
+    fi
+    echo "[${LSB_JOBID},${LSB_JOBINDEX}] Running command #${i}"
+    bash -lc "$CMD"
+    i=$((i+1))
+done
+
+echo "Done array index $LSB_JOBINDEX."
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   3.50 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     40960.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   107 sec.
+    Turnaround time :                            12 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//rf327593655.err> for stderr output of this job.
+

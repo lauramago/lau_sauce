@@ -1,0 +1,94 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27593506[1]: <mpnn[1-1]> in cluster <dcc> Exited
+
+Job <mpnn[1-1]> was submitted from host <hpclogin1> by user <marhr> in cluster <dcc> at Sat Jan 10 15:19:31 2026
+Job was executed on host(s) <4*n-62-30-23>, in queue <hpc>, as user <marhr> in cluster <dcc> at Sat Jan 10 15:19:31 2026
+</zhome/6a/1/227894> was used as the home directory.
+</work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/submit> was used as the working directory.
+Started at Sat Jan 10 15:19:31 2026
+Terminated at Sat Jan 10 15:19:34 2026
+Results reported at Sat Jan 10 15:19:34 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+### General options
+#BSUB -q hpc
+#BSUB -J mpnn[1-1]
+#BSUB -n 4
+#BSUB -W 2:00
+#BSUB -R "rusage[mem=10GB]"
+#BSUB -o /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//mpnn_%J_%I.out
+#BSUB -e /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//mpnn_%J_%I.err
+# -- end of LSF options --
+
+# Ensure logs directory exists
+mkdir -p "/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs/"
+
+# Activate environment
+source "/dtu/projects/dbl/LigandMPNN/25.3.1-0//miniforge3/bin/activate ligandmpnn_env"
+export MPNN_PATH="/dtu/projects/dbl/LigandMPNN/25.3.1-0/"
+export PYTHONPATH="${MPNN_PATH}:${PYTHONPATH:-}"
+
+# Load file mapping for this array job
+MAPPING_FILE="mpnn_file_mapping.json"
+ARRAY_INDEX=$LSB_JOBINDEX
+
+# Extract files for this array index from JSON
+FILES=$(python3 -c "import json, sys; data=json.load(open(sys.argv[1])); print(' '.join(data['file_mapping'][str(sys.argv[2])]))" "$MAPPING_FILE" "$ARRAY_INDEX")
+
+# Process each file assigned to this array job
+for STRUCTURE_FILE in $FILES; do
+    echo "Processing: $STRUCTURE_FILE"
+
+    # Create output directory for this file
+    BASENAME=$(basename "$STRUCTURE_FILE" .cif.gz)
+    BASENAME=$(basename "$BASENAME" .pdb)
+    OUT_DIR="/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/mpnn_out//${BASENAME}"
+    mkdir -p "$OUT_DIR"
+
+    # Run MPNN
+    python "${MPNN_PATH}/run.py" \
+        --seed 42 \
+        --pdb_path "$STRUCTURE_FILE" \
+        --out_folder "$OUT_DIR" \
+        --batch_size 5 \
+        --number_of_batches 1 \
+        --model_type "protein_mpnn" \
+        --checkpoint_protein_mpnn "/dtu/projects/dbl/LigandMPNN/25.3.1-0//model_params/proteinmpnn_v_48_020.pt" \
+        --chains_to_design "A"
+
+    echo "Completed: $STRUCTURE_FILE"
+done
+
+
+(... more ...)
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   2.15 sec.
+    Max Memory :                                 -
+    Average Memory :                             -
+    Total Requested Memory :                     40960.00 MB
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              -
+    Max Threads :                                -
+    Run time :                                   38 sec.
+    Turnaround time :                            3 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//mpnn_27593506_1.err> for stderr output of this job.
+

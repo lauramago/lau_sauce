@@ -1,0 +1,19 @@
+{
+    "name": "CLR_RAMP1_rfd3_test_CLR_RAMP1_test_0_model_1__id4",
+    "components": [
+        {
+            "seq": "LLNLLLSLVSACATAPEVVARLMNDPEHPLTPLQVALMAEAIVDGIRELIGEEKVFALGLLAALTSDLSILNKIFELVAAAAKDRDALLAAIRADPLLALVPPEKIAYLVDHASERILAEVA",
+            "chain_id": "A"
+        },
+        {
+            "path": "/work3/marhr/Projects/rfd3/CGRP/input/clr_edited.cif"
+        },
+        {
+            "path": "/work3/marhr/Projects/rfd3/CGRP/input/ramp1_edited.cif"
+        }
+    ],
+    "template_selection": [
+        "F",
+        "G"
+    ]
+}

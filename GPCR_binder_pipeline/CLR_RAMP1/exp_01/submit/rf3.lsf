@@ -1,0 +1,33 @@
+#!/bin/sh
+#BSUB -q gpua100
+#BSUB -J "rf3[1-1]"
+#BSUB -n 4
+#BSUB -R "span[hosts=1]"
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -W 12:00
+#BSUB -R "rusage[mem=10GB]"
+#BSUB -B
+#BSUB -N
+#BSUB -o /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//rf3%J.out
+#BSUB -e /work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/logs//rf3%J.err
+
+set -euo pipefail
+
+GROUP_SIZE=20
+CMD_FILE="/work3/marhr/Projects/dbl/binder_design_pipeline/CLR_RAMP1/exp_01/cmds/rf3_cmds"
+
+FIRST=$(( ($LSB_JOBINDEX - 1) * GROUP_SIZE + 1 ))
+LAST=$(( $LSB_JOBINDEX * GROUP_SIZE ))
+
+i=$FIRST
+while [ $i -le $LAST ]; do
+    CMD=$(sed -n "${i}p" "$CMD_FILE" || true)
+    if [ -z "$CMD" ]; then
+        break
+    fi
+    echo "[${LSB_JOBID},${LSB_JOBINDEX}] Running command #${i}"
+    bash -lc "$CMD"
+    i=$((i+1))
+done
+
+echo "Done array index $LSB_JOBINDEX."

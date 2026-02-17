@@ -1,0 +1,1646 @@
+[27593689,1] Running command #1
+RF3 environment activated!
+Python: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env/bin/python
+Environment: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env
+INFERENCE TRAINER CONFIGURATION
+├── strategy
+│   └── ddp                                                                                         
+├── accelerator
+│   └── gpu                                                                                         
+├── devices_per_node
+│   └── 1                                                                                           
+├── num_nodes
+│   └── 1                                                                                           
+├── loss
+│   └── confidence_loss:                                                                            
+│         _target_: modelhub.loss.af3_confidence_loss.ConfidenceLoss                                
+│         weight: 1.0                                                                               
+│         plddt:                                                                                    
+│           weight: 1.0                                                                             
+│           n_bins: 50                                                                              
+│           max_value: 1.0                                                                          
+│         pae:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         pde:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         exp_resolved:                                                                             
+│           weight: 1.0                                                                             
+│           n_bins: 2                                                                               
+│           max_value: 1                                                                            
+│         log_statistics: true                                                                      
+│         rank_loss:                                                                                
+│           use_listnet_loss: false                                                                 
+│           weight: 0.0                                                                             
+│                                                                                                   
+├── metrics
+│   └── {}                                                                                          
+│                                                                                                   
+├── _target_
+│   └── modelhub.trainers.rf3.RF3TrainerWithConfidence                                              
+├── validate_every_n_epochs
+│   └── 999                                                                                         
+├── max_epochs
+│   └── 10000                                                                                       
+├── n_examples_per_epoch
+│   └── 12000                                                                                       
+├── prevalidate
+│   └── False                                                                                       
+├── n_recycles_train
+│   └── 4                                                                                           
+├── clip_grad_max_norm
+│   └── 10.0                                                                                        
+├── output_dir
+│   └── /home/dimaio/modelhub/logs/train/af3/2025-07-30_17-25_JOB_198                               
+├── checkpoint_every_n_epochs
+│   └── 1                                                                                           
+├── precision
+│   └── bf16-mixed                                                                                  
+└── grad_accum_steps
+    └── 4                                                                                           
+Adding loss confidence_loss to the loss function
+INFERENCE MODEL CONFIGURATION
+├── optimizer
+│   └── _target_: torch.optim.Adam                                                                  
+│       lr: 0                                                                                       
+│       betas:                                                                                      
+│       - 0.9                                                                                       
+│       - 0.95                                                                                      
+│       eps: 1.0e-08                                                                                
+│                                                                                                   
+├── lr_scheduler
+│   └── _target_: modelhub.training.schedulers.AF3Scheduler                                         
+│       base_lr: 0.0009                                                                             
+│       warmup_steps: 1000                                                                          
+│       decay_factor: 0.95                                                                          
+│       decay_steps: 50000                                                                          
+│                                                                                                   
+├── ema
+│   └── decay: 0.999                                                                                
+│                                                                                                   
+└── net
+    └── _target_: modelhub.model.RF3.RF3WithConfidence                                              
+        c_s: 384                                                                                    
+        c_z: 128                                                                                    
+        c_atom: 128                                                                                 
+        c_atompair: 16                                                                              
+        c_s_inputs: 449                                                                             
+        feature_initializer:                                                                        
+          input_feature_embedder:                                                                   
+            features:                                                                               
+            - restype                                                                               
+            - profile                                                                               
+            - deletion_mean                                                                         
+            atom_attention_encoder:                                                                 
+              c_token: 384                                                                          
+              c_atom_1d_features: 393                                                               
+              c_tokenpair: 128                                                                      
+              use_inv_dist_squared: true                                                            
+              atom_1d_features:                                                                     
+              - ref_pos                                                                             
+              - ref_charge                                                                          
+              - ref_mask                                                                            
+              - ref_element                                                                         
+              - ref_atom_name_chars                                                                 
+              - ref_pos_ground_truth                                                                
+              - has_atom_level_embedding                                                            
+              atom_transformer:                                                                     
+                n_queries: 32                                                                       
+                n_keys: 128                                                                         
+                diffusion_transformer:                                                              
+                  n_block: 3                                                                        
+                  diffusion_transformer_block:                                                      
+                    n_head: 4                                                                       
+                    no_residual_connection_between_attention_and_transition: true                   
+                    kq_norm: true                                                                   
+              use_atom_level_embedding: true                                                        
+              atom_level_embedding_dim: 384                                                         
+          relative_position_encoding:                                                               
+            r_max: 32                                                                               
+            s_max: 2                                                                                
+        recycler:                                                                                   
+          n_pairformer_blocks: 48                                                                   
+          pairformer_block:                                                                         
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          template_embedder:                                                                        
+            n_block: 2                                                                              
+            raw_template_dim: 66                                                                    
+            c: 64                                                                                   
+            p_drop: 0.25                                                                            
+          msa_module:                                                                               
+            n_block: 4                                                                              
+            c_m: 64                                                                                 
+            p_drop_msa: 0.15                                                                        
+            p_drop_pair: 0.25                                                                       
+            msa_subsample_embedder:                                                                 
+              num_sequences: 1024                                                                   
+              dim_raw_msa: 34                                                                       
+              c_s_inputs: 449                                                                       
+              c_msa_embed: 64                                                                       
+            outer_product:                                                                          
+              c_msa_embed: 64                                                                       
+              c_outer_product: 32                                                                   
+              c_out: 128                                                                            
+            msa_pair_weighted_averaging:                                                            
+              n_heads: 8                                                                            
+              c_weighted_average: 32                                                                
+              c_msa_embed: 64                                                                       
+              c_z: 128                                                                              
+              separate_gate_for_every_channel: true                                                 
+            msa_transition:                                                                         
+              'n': 4                                                                                
+              c: 64                                                                                 
+            triangle_multiplication_outgoing:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_multiplication_incoming:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_attention_starting:                                                            
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            triangle_attention_ending:                                                              
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            pair_transition:                                                                        
+              'n': 4                                                                                
+              c: 128                                                                                
+        diffusion_module:                                                                           
+          sigma_data: 16                                                                            
+          c_token: 768                                                                              
+          f_pred: edm                                                                               
+          diffusion_conditioning:                                                                   
+            c_s_inputs: 449                                                                         
+            c_t_embed: 256                                                                          
+            relative_position_encoding:                                                             
+              r_max: 32                                                                             
+              s_max: 2                                                                              
+          atom_attention_encoder:                                                                   
+            c_tokenpair: 128                                                                        
+            c_atom_1d_features: 393                                                                 
+            use_inv_dist_squared: true                                                              
+            atom_1d_features:                                                                       
+            - ref_pos                                                                               
+            - ref_charge                                                                            
+            - ref_mask                                                                              
+            - ref_element                                                                           
+            - ref_atom_name_chars                                                                   
+            - ref_pos_ground_truth                                                                  
+            - has_atom_level_embedding                                                              
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+            broadcast_trunk_feats_on_1dim_old: false                                                
+            use_chiral_features: true                                                               
+            no_grad_on_chiral_center: false                                                         
+            use_atom_level_embedding: true                                                          
+            atom_level_embedding_dim: 384                                                           
+          diffusion_transformer:                                                                    
+            n_block: 24                                                                             
+            diffusion_transformer_block:                                                            
+              n_head: 16                                                                            
+              no_residual_connection_between_attention_and_transition: true                         
+              kq_norm: true                                                                         
+          atom_attention_decoder:                                                                   
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+        distogram_head:                                                                             
+          bins: 65                                                                                  
+        inference_sampler:                                                                          
+          solver: af3                                                                               
+          num_timesteps: 50                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        mini_rollout_sampler:                                                                       
+          solver: af3                                                                               
+          num_timesteps: 20                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        confidence_head:                                                                            
+          c_s: 384                                                                                  
+          c_z: 128                                                                                  
+          n_pairformer_layers: 4                                                                    
+          pairformer:                                                                               
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          n_bins_pae: 64                                                                            
+          n_bins_pde: 64                                                                            
+          n_bins_plddt: 50                                                                          
+          n_bins_exp_resolved: 2                                                                    
+          use_Cb_distances: false                                                                   
+          use_af3_style_binning_and_final_layer_norms: true                                         
+          symmetrize_Cb_logits: true                                                                
+                                                                                                    
+INFERENCE TRANSFORM PIPELINE
+├── _target_
+│   └── modelhub.data.pipelines.build_af3_transform_pipeline                                        
+├── is_inference
+│   └── True                                                                                        
+├── protein_msa_dirs
+│   └── []                                                                                          
+├── rna_msa_dirs
+│   └── []                                                                                          
+├── n_recycles
+│   └── 10                                                                                          
+├── crop_size
+│   └── None                                                                                        
+├── n_msa
+│   └── 1024                                                                                        
+├── diffusion_batch_size
+│   └── 5                                                                                           
+├── max_atoms_in_crop
+│   └── None                                                                                        
+├── return_atom_array
+│   └── True                                                                                        
+├── run_confidence_head
+│   └── True                                                                                        
+├── p_unconditional
+│   └── 1.0                                                                                         
+├── p_dropout_atom_level_embeddings
+│   └── 0.0                                                                                         
+├── take_first_chiral_subordering
+│   └── False                                                                                       
+├── use_element_for_atom_names_of_atomized_tokens
+│   └── False                                                                                       
+├── raise_if_missing_msa_for_protein_of_length_n
+│   └── None                                                                                        
+├── undesired_res_names
+│   └── []                                                                                          
+├── template_noise_scales
+│   └── atomized: 1.0e-05                                                                           
+│       not_atomized: 1.0e-05                                                                       
+│                                                                                                   
+├── allowed_chain_types_for_conditioning
+│   └── None                                                                                        
+├── p_give_polymer_ref_conf
+│   └── 0.0                                                                                         
+└── p_give_non_polymer_ref_conf
+    └── 0.0                                                                                         
+[27593689,1] Running command #2
+RF3 environment activated!
+Python: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env/bin/python
+Environment: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env
+INFERENCE TRAINER CONFIGURATION
+├── strategy
+│   └── ddp                                                                                         
+├── accelerator
+│   └── gpu                                                                                         
+├── devices_per_node
+│   └── 1                                                                                           
+├── num_nodes
+│   └── 1                                                                                           
+├── loss
+│   └── confidence_loss:                                                                            
+│         _target_: modelhub.loss.af3_confidence_loss.ConfidenceLoss                                
+│         weight: 1.0                                                                               
+│         plddt:                                                                                    
+│           weight: 1.0                                                                             
+│           n_bins: 50                                                                              
+│           max_value: 1.0                                                                          
+│         pae:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         pde:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         exp_resolved:                                                                             
+│           weight: 1.0                                                                             
+│           n_bins: 2                                                                               
+│           max_value: 1                                                                            
+│         log_statistics: true                                                                      
+│         rank_loss:                                                                                
+│           use_listnet_loss: false                                                                 
+│           weight: 0.0                                                                             
+│                                                                                                   
+├── metrics
+│   └── {}                                                                                          
+│                                                                                                   
+├── _target_
+│   └── modelhub.trainers.rf3.RF3TrainerWithConfidence                                              
+├── validate_every_n_epochs
+│   └── 999                                                                                         
+├── max_epochs
+│   └── 10000                                                                                       
+├── n_examples_per_epoch
+│   └── 12000                                                                                       
+├── prevalidate
+│   └── False                                                                                       
+├── n_recycles_train
+│   └── 4                                                                                           
+├── clip_grad_max_norm
+│   └── 10.0                                                                                        
+├── output_dir
+│   └── /home/dimaio/modelhub/logs/train/af3/2025-07-30_17-25_JOB_198                               
+├── checkpoint_every_n_epochs
+│   └── 1                                                                                           
+├── precision
+│   └── bf16-mixed                                                                                  
+└── grad_accum_steps
+    └── 4                                                                                           
+Adding loss confidence_loss to the loss function
+INFERENCE MODEL CONFIGURATION
+├── optimizer
+│   └── _target_: torch.optim.Adam                                                                  
+│       lr: 0                                                                                       
+│       betas:                                                                                      
+│       - 0.9                                                                                       
+│       - 0.95                                                                                      
+│       eps: 1.0e-08                                                                                
+│                                                                                                   
+├── lr_scheduler
+│   └── _target_: modelhub.training.schedulers.AF3Scheduler                                         
+│       base_lr: 0.0009                                                                             
+│       warmup_steps: 1000                                                                          
+│       decay_factor: 0.95                                                                          
+│       decay_steps: 50000                                                                          
+│                                                                                                   
+├── ema
+│   └── decay: 0.999                                                                                
+│                                                                                                   
+└── net
+    └── _target_: modelhub.model.RF3.RF3WithConfidence                                              
+        c_s: 384                                                                                    
+        c_z: 128                                                                                    
+        c_atom: 128                                                                                 
+        c_atompair: 16                                                                              
+        c_s_inputs: 449                                                                             
+        feature_initializer:                                                                        
+          input_feature_embedder:                                                                   
+            features:                                                                               
+            - restype                                                                               
+            - profile                                                                               
+            - deletion_mean                                                                         
+            atom_attention_encoder:                                                                 
+              c_token: 384                                                                          
+              c_atom_1d_features: 393                                                               
+              c_tokenpair: 128                                                                      
+              use_inv_dist_squared: true                                                            
+              atom_1d_features:                                                                     
+              - ref_pos                                                                             
+              - ref_charge                                                                          
+              - ref_mask                                                                            
+              - ref_element                                                                         
+              - ref_atom_name_chars                                                                 
+              - ref_pos_ground_truth                                                                
+              - has_atom_level_embedding                                                            
+              atom_transformer:                                                                     
+                n_queries: 32                                                                       
+                n_keys: 128                                                                         
+                diffusion_transformer:                                                              
+                  n_block: 3                                                                        
+                  diffusion_transformer_block:                                                      
+                    n_head: 4                                                                       
+                    no_residual_connection_between_attention_and_transition: true                   
+                    kq_norm: true                                                                   
+              use_atom_level_embedding: true                                                        
+              atom_level_embedding_dim: 384                                                         
+          relative_position_encoding:                                                               
+            r_max: 32                                                                               
+            s_max: 2                                                                                
+        recycler:                                                                                   
+          n_pairformer_blocks: 48                                                                   
+          pairformer_block:                                                                         
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          template_embedder:                                                                        
+            n_block: 2                                                                              
+            raw_template_dim: 66                                                                    
+            c: 64                                                                                   
+            p_drop: 0.25                                                                            
+          msa_module:                                                                               
+            n_block: 4                                                                              
+            c_m: 64                                                                                 
+            p_drop_msa: 0.15                                                                        
+            p_drop_pair: 0.25                                                                       
+            msa_subsample_embedder:                                                                 
+              num_sequences: 1024                                                                   
+              dim_raw_msa: 34                                                                       
+              c_s_inputs: 449                                                                       
+              c_msa_embed: 64                                                                       
+            outer_product:                                                                          
+              c_msa_embed: 64                                                                       
+              c_outer_product: 32                                                                   
+              c_out: 128                                                                            
+            msa_pair_weighted_averaging:                                                            
+              n_heads: 8                                                                            
+              c_weighted_average: 32                                                                
+              c_msa_embed: 64                                                                       
+              c_z: 128                                                                              
+              separate_gate_for_every_channel: true                                                 
+            msa_transition:                                                                         
+              'n': 4                                                                                
+              c: 64                                                                                 
+            triangle_multiplication_outgoing:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_multiplication_incoming:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_attention_starting:                                                            
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            triangle_attention_ending:                                                              
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            pair_transition:                                                                        
+              'n': 4                                                                                
+              c: 128                                                                                
+        diffusion_module:                                                                           
+          sigma_data: 16                                                                            
+          c_token: 768                                                                              
+          f_pred: edm                                                                               
+          diffusion_conditioning:                                                                   
+            c_s_inputs: 449                                                                         
+            c_t_embed: 256                                                                          
+            relative_position_encoding:                                                             
+              r_max: 32                                                                             
+              s_max: 2                                                                              
+          atom_attention_encoder:                                                                   
+            c_tokenpair: 128                                                                        
+            c_atom_1d_features: 393                                                                 
+            use_inv_dist_squared: true                                                              
+            atom_1d_features:                                                                       
+            - ref_pos                                                                               
+            - ref_charge                                                                            
+            - ref_mask                                                                              
+            - ref_element                                                                           
+            - ref_atom_name_chars                                                                   
+            - ref_pos_ground_truth                                                                  
+            - has_atom_level_embedding                                                              
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+            broadcast_trunk_feats_on_1dim_old: false                                                
+            use_chiral_features: true                                                               
+            no_grad_on_chiral_center: false                                                         
+            use_atom_level_embedding: true                                                          
+            atom_level_embedding_dim: 384                                                           
+          diffusion_transformer:                                                                    
+            n_block: 24                                                                             
+            diffusion_transformer_block:                                                            
+              n_head: 16                                                                            
+              no_residual_connection_between_attention_and_transition: true                         
+              kq_norm: true                                                                         
+          atom_attention_decoder:                                                                   
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+        distogram_head:                                                                             
+          bins: 65                                                                                  
+        inference_sampler:                                                                          
+          solver: af3                                                                               
+          num_timesteps: 50                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        mini_rollout_sampler:                                                                       
+          solver: af3                                                                               
+          num_timesteps: 20                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        confidence_head:                                                                            
+          c_s: 384                                                                                  
+          c_z: 128                                                                                  
+          n_pairformer_layers: 4                                                                    
+          pairformer:                                                                               
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          n_bins_pae: 64                                                                            
+          n_bins_pde: 64                                                                            
+          n_bins_plddt: 50                                                                          
+          n_bins_exp_resolved: 2                                                                    
+          use_Cb_distances: false                                                                   
+          use_af3_style_binning_and_final_layer_norms: true                                         
+          symmetrize_Cb_logits: true                                                                
+                                                                                                    
+INFERENCE TRANSFORM PIPELINE
+├── _target_
+│   └── modelhub.data.pipelines.build_af3_transform_pipeline                                        
+├── is_inference
+│   └── True                                                                                        
+├── protein_msa_dirs
+│   └── []                                                                                          
+├── rna_msa_dirs
+│   └── []                                                                                          
+├── n_recycles
+│   └── 10                                                                                          
+├── crop_size
+│   └── None                                                                                        
+├── n_msa
+│   └── 1024                                                                                        
+├── diffusion_batch_size
+│   └── 5                                                                                           
+├── max_atoms_in_crop
+│   └── None                                                                                        
+├── return_atom_array
+│   └── True                                                                                        
+├── run_confidence_head
+│   └── True                                                                                        
+├── p_unconditional
+│   └── 1.0                                                                                         
+├── p_dropout_atom_level_embeddings
+│   └── 0.0                                                                                         
+├── take_first_chiral_subordering
+│   └── False                                                                                       
+├── use_element_for_atom_names_of_atomized_tokens
+│   └── False                                                                                       
+├── raise_if_missing_msa_for_protein_of_length_n
+│   └── None                                                                                        
+├── undesired_res_names
+│   └── []                                                                                          
+├── template_noise_scales
+│   └── atomized: 1.0e-05                                                                           
+│       not_atomized: 1.0e-05                                                                       
+│                                                                                                   
+├── allowed_chain_types_for_conditioning
+│   └── None                                                                                        
+├── p_give_polymer_ref_conf
+│   └── 0.0                                                                                         
+└── p_give_non_polymer_ref_conf
+    └── 0.0                                                                                         
+[27593689,1] Running command #3
+RF3 environment activated!
+Python: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env/bin/python
+Environment: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env
+INFERENCE TRAINER CONFIGURATION
+├── strategy
+│   └── ddp                                                                                         
+├── accelerator
+│   └── gpu                                                                                         
+├── devices_per_node
+│   └── 1                                                                                           
+├── num_nodes
+│   └── 1                                                                                           
+├── loss
+│   └── confidence_loss:                                                                            
+│         _target_: modelhub.loss.af3_confidence_loss.ConfidenceLoss                                
+│         weight: 1.0                                                                               
+│         plddt:                                                                                    
+│           weight: 1.0                                                                             
+│           n_bins: 50                                                                              
+│           max_value: 1.0                                                                          
+│         pae:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         pde:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         exp_resolved:                                                                             
+│           weight: 1.0                                                                             
+│           n_bins: 2                                                                               
+│           max_value: 1                                                                            
+│         log_statistics: true                                                                      
+│         rank_loss:                                                                                
+│           use_listnet_loss: false                                                                 
+│           weight: 0.0                                                                             
+│                                                                                                   
+├── metrics
+│   └── {}                                                                                          
+│                                                                                                   
+├── _target_
+│   └── modelhub.trainers.rf3.RF3TrainerWithConfidence                                              
+├── validate_every_n_epochs
+│   └── 999                                                                                         
+├── max_epochs
+│   └── 10000                                                                                       
+├── n_examples_per_epoch
+│   └── 12000                                                                                       
+├── prevalidate
+│   └── False                                                                                       
+├── n_recycles_train
+│   └── 4                                                                                           
+├── clip_grad_max_norm
+│   └── 10.0                                                                                        
+├── output_dir
+│   └── /home/dimaio/modelhub/logs/train/af3/2025-07-30_17-25_JOB_198                               
+├── checkpoint_every_n_epochs
+│   └── 1                                                                                           
+├── precision
+│   └── bf16-mixed                                                                                  
+└── grad_accum_steps
+    └── 4                                                                                           
+Adding loss confidence_loss to the loss function
+INFERENCE MODEL CONFIGURATION
+├── optimizer
+│   └── _target_: torch.optim.Adam                                                                  
+│       lr: 0                                                                                       
+│       betas:                                                                                      
+│       - 0.9                                                                                       
+│       - 0.95                                                                                      
+│       eps: 1.0e-08                                                                                
+│                                                                                                   
+├── lr_scheduler
+│   └── _target_: modelhub.training.schedulers.AF3Scheduler                                         
+│       base_lr: 0.0009                                                                             
+│       warmup_steps: 1000                                                                          
+│       decay_factor: 0.95                                                                          
+│       decay_steps: 50000                                                                          
+│                                                                                                   
+├── ema
+│   └── decay: 0.999                                                                                
+│                                                                                                   
+└── net
+    └── _target_: modelhub.model.RF3.RF3WithConfidence                                              
+        c_s: 384                                                                                    
+        c_z: 128                                                                                    
+        c_atom: 128                                                                                 
+        c_atompair: 16                                                                              
+        c_s_inputs: 449                                                                             
+        feature_initializer:                                                                        
+          input_feature_embedder:                                                                   
+            features:                                                                               
+            - restype                                                                               
+            - profile                                                                               
+            - deletion_mean                                                                         
+            atom_attention_encoder:                                                                 
+              c_token: 384                                                                          
+              c_atom_1d_features: 393                                                               
+              c_tokenpair: 128                                                                      
+              use_inv_dist_squared: true                                                            
+              atom_1d_features:                                                                     
+              - ref_pos                                                                             
+              - ref_charge                                                                          
+              - ref_mask                                                                            
+              - ref_element                                                                         
+              - ref_atom_name_chars                                                                 
+              - ref_pos_ground_truth                                                                
+              - has_atom_level_embedding                                                            
+              atom_transformer:                                                                     
+                n_queries: 32                                                                       
+                n_keys: 128                                                                         
+                diffusion_transformer:                                                              
+                  n_block: 3                                                                        
+                  diffusion_transformer_block:                                                      
+                    n_head: 4                                                                       
+                    no_residual_connection_between_attention_and_transition: true                   
+                    kq_norm: true                                                                   
+              use_atom_level_embedding: true                                                        
+              atom_level_embedding_dim: 384                                                         
+          relative_position_encoding:                                                               
+            r_max: 32                                                                               
+            s_max: 2                                                                                
+        recycler:                                                                                   
+          n_pairformer_blocks: 48                                                                   
+          pairformer_block:                                                                         
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          template_embedder:                                                                        
+            n_block: 2                                                                              
+            raw_template_dim: 66                                                                    
+            c: 64                                                                                   
+            p_drop: 0.25                                                                            
+          msa_module:                                                                               
+            n_block: 4                                                                              
+            c_m: 64                                                                                 
+            p_drop_msa: 0.15                                                                        
+            p_drop_pair: 0.25                                                                       
+            msa_subsample_embedder:                                                                 
+              num_sequences: 1024                                                                   
+              dim_raw_msa: 34                                                                       
+              c_s_inputs: 449                                                                       
+              c_msa_embed: 64                                                                       
+            outer_product:                                                                          
+              c_msa_embed: 64                                                                       
+              c_outer_product: 32                                                                   
+              c_out: 128                                                                            
+            msa_pair_weighted_averaging:                                                            
+              n_heads: 8                                                                            
+              c_weighted_average: 32                                                                
+              c_msa_embed: 64                                                                       
+              c_z: 128                                                                              
+              separate_gate_for_every_channel: true                                                 
+            msa_transition:                                                                         
+              'n': 4                                                                                
+              c: 64                                                                                 
+            triangle_multiplication_outgoing:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_multiplication_incoming:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_attention_starting:                                                            
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            triangle_attention_ending:                                                              
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            pair_transition:                                                                        
+              'n': 4                                                                                
+              c: 128                                                                                
+        diffusion_module:                                                                           
+          sigma_data: 16                                                                            
+          c_token: 768                                                                              
+          f_pred: edm                                                                               
+          diffusion_conditioning:                                                                   
+            c_s_inputs: 449                                                                         
+            c_t_embed: 256                                                                          
+            relative_position_encoding:                                                             
+              r_max: 32                                                                             
+              s_max: 2                                                                              
+          atom_attention_encoder:                                                                   
+            c_tokenpair: 128                                                                        
+            c_atom_1d_features: 393                                                                 
+            use_inv_dist_squared: true                                                              
+            atom_1d_features:                                                                       
+            - ref_pos                                                                               
+            - ref_charge                                                                            
+            - ref_mask                                                                              
+            - ref_element                                                                           
+            - ref_atom_name_chars                                                                   
+            - ref_pos_ground_truth                                                                  
+            - has_atom_level_embedding                                                              
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+            broadcast_trunk_feats_on_1dim_old: false                                                
+            use_chiral_features: true                                                               
+            no_grad_on_chiral_center: false                                                         
+            use_atom_level_embedding: true                                                          
+            atom_level_embedding_dim: 384                                                           
+          diffusion_transformer:                                                                    
+            n_block: 24                                                                             
+            diffusion_transformer_block:                                                            
+              n_head: 16                                                                            
+              no_residual_connection_between_attention_and_transition: true                         
+              kq_norm: true                                                                         
+          atom_attention_decoder:                                                                   
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+        distogram_head:                                                                             
+          bins: 65                                                                                  
+        inference_sampler:                                                                          
+          solver: af3                                                                               
+          num_timesteps: 50                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        mini_rollout_sampler:                                                                       
+          solver: af3                                                                               
+          num_timesteps: 20                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        confidence_head:                                                                            
+          c_s: 384                                                                                  
+          c_z: 128                                                                                  
+          n_pairformer_layers: 4                                                                    
+          pairformer:                                                                               
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          n_bins_pae: 64                                                                            
+          n_bins_pde: 64                                                                            
+          n_bins_plddt: 50                                                                          
+          n_bins_exp_resolved: 2                                                                    
+          use_Cb_distances: false                                                                   
+          use_af3_style_binning_and_final_layer_norms: true                                         
+          symmetrize_Cb_logits: true                                                                
+                                                                                                    
+INFERENCE TRANSFORM PIPELINE
+├── _target_
+│   └── modelhub.data.pipelines.build_af3_transform_pipeline                                        
+├── is_inference
+│   └── True                                                                                        
+├── protein_msa_dirs
+│   └── []                                                                                          
+├── rna_msa_dirs
+│   └── []                                                                                          
+├── n_recycles
+│   └── 10                                                                                          
+├── crop_size
+│   └── None                                                                                        
+├── n_msa
+│   └── 1024                                                                                        
+├── diffusion_batch_size
+│   └── 5                                                                                           
+├── max_atoms_in_crop
+│   └── None                                                                                        
+├── return_atom_array
+│   └── True                                                                                        
+├── run_confidence_head
+│   └── True                                                                                        
+├── p_unconditional
+│   └── 1.0                                                                                         
+├── p_dropout_atom_level_embeddings
+│   └── 0.0                                                                                         
+├── take_first_chiral_subordering
+│   └── False                                                                                       
+├── use_element_for_atom_names_of_atomized_tokens
+│   └── False                                                                                       
+├── raise_if_missing_msa_for_protein_of_length_n
+│   └── None                                                                                        
+├── undesired_res_names
+│   └── []                                                                                          
+├── template_noise_scales
+│   └── atomized: 1.0e-05                                                                           
+│       not_atomized: 1.0e-05                                                                       
+│                                                                                                   
+├── allowed_chain_types_for_conditioning
+│   └── None                                                                                        
+├── p_give_polymer_ref_conf
+│   └── 0.0                                                                                         
+└── p_give_non_polymer_ref_conf
+    └── 0.0                                                                                         
+[27593689,1] Running command #4
+RF3 environment activated!
+Python: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env/bin/python
+Environment: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env
+INFERENCE TRAINER CONFIGURATION
+├── strategy
+│   └── ddp                                                                                         
+├── accelerator
+│   └── gpu                                                                                         
+├── devices_per_node
+│   └── 1                                                                                           
+├── num_nodes
+│   └── 1                                                                                           
+├── loss
+│   └── confidence_loss:                                                                            
+│         _target_: modelhub.loss.af3_confidence_loss.ConfidenceLoss                                
+│         weight: 1.0                                                                               
+│         plddt:                                                                                    
+│           weight: 1.0                                                                             
+│           n_bins: 50                                                                              
+│           max_value: 1.0                                                                          
+│         pae:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         pde:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         exp_resolved:                                                                             
+│           weight: 1.0                                                                             
+│           n_bins: 2                                                                               
+│           max_value: 1                                                                            
+│         log_statistics: true                                                                      
+│         rank_loss:                                                                                
+│           use_listnet_loss: false                                                                 
+│           weight: 0.0                                                                             
+│                                                                                                   
+├── metrics
+│   └── {}                                                                                          
+│                                                                                                   
+├── _target_
+│   └── modelhub.trainers.rf3.RF3TrainerWithConfidence                                              
+├── validate_every_n_epochs
+│   └── 999                                                                                         
+├── max_epochs
+│   └── 10000                                                                                       
+├── n_examples_per_epoch
+│   └── 12000                                                                                       
+├── prevalidate
+│   └── False                                                                                       
+├── n_recycles_train
+│   └── 4                                                                                           
+├── clip_grad_max_norm
+│   └── 10.0                                                                                        
+├── output_dir
+│   └── /home/dimaio/modelhub/logs/train/af3/2025-07-30_17-25_JOB_198                               
+├── checkpoint_every_n_epochs
+│   └── 1                                                                                           
+├── precision
+│   └── bf16-mixed                                                                                  
+└── grad_accum_steps
+    └── 4                                                                                           
+Adding loss confidence_loss to the loss function
+INFERENCE MODEL CONFIGURATION
+├── optimizer
+│   └── _target_: torch.optim.Adam                                                                  
+│       lr: 0                                                                                       
+│       betas:                                                                                      
+│       - 0.9                                                                                       
+│       - 0.95                                                                                      
+│       eps: 1.0e-08                                                                                
+│                                                                                                   
+├── lr_scheduler
+│   └── _target_: modelhub.training.schedulers.AF3Scheduler                                         
+│       base_lr: 0.0009                                                                             
+│       warmup_steps: 1000                                                                          
+│       decay_factor: 0.95                                                                          
+│       decay_steps: 50000                                                                          
+│                                                                                                   
+├── ema
+│   └── decay: 0.999                                                                                
+│                                                                                                   
+└── net
+    └── _target_: modelhub.model.RF3.RF3WithConfidence                                              
+        c_s: 384                                                                                    
+        c_z: 128                                                                                    
+        c_atom: 128                                                                                 
+        c_atompair: 16                                                                              
+        c_s_inputs: 449                                                                             
+        feature_initializer:                                                                        
+          input_feature_embedder:                                                                   
+            features:                                                                               
+            - restype                                                                               
+            - profile                                                                               
+            - deletion_mean                                                                         
+            atom_attention_encoder:                                                                 
+              c_token: 384                                                                          
+              c_atom_1d_features: 393                                                               
+              c_tokenpair: 128                                                                      
+              use_inv_dist_squared: true                                                            
+              atom_1d_features:                                                                     
+              - ref_pos                                                                             
+              - ref_charge                                                                          
+              - ref_mask                                                                            
+              - ref_element                                                                         
+              - ref_atom_name_chars                                                                 
+              - ref_pos_ground_truth                                                                
+              - has_atom_level_embedding                                                            
+              atom_transformer:                                                                     
+                n_queries: 32                                                                       
+                n_keys: 128                                                                         
+                diffusion_transformer:                                                              
+                  n_block: 3                                                                        
+                  diffusion_transformer_block:                                                      
+                    n_head: 4                                                                       
+                    no_residual_connection_between_attention_and_transition: true                   
+                    kq_norm: true                                                                   
+              use_atom_level_embedding: true                                                        
+              atom_level_embedding_dim: 384                                                         
+          relative_position_encoding:                                                               
+            r_max: 32                                                                               
+            s_max: 2                                                                                
+        recycler:                                                                                   
+          n_pairformer_blocks: 48                                                                   
+          pairformer_block:                                                                         
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          template_embedder:                                                                        
+            n_block: 2                                                                              
+            raw_template_dim: 66                                                                    
+            c: 64                                                                                   
+            p_drop: 0.25                                                                            
+          msa_module:                                                                               
+            n_block: 4                                                                              
+            c_m: 64                                                                                 
+            p_drop_msa: 0.15                                                                        
+            p_drop_pair: 0.25                                                                       
+            msa_subsample_embedder:                                                                 
+              num_sequences: 1024                                                                   
+              dim_raw_msa: 34                                                                       
+              c_s_inputs: 449                                                                       
+              c_msa_embed: 64                                                                       
+            outer_product:                                                                          
+              c_msa_embed: 64                                                                       
+              c_outer_product: 32                                                                   
+              c_out: 128                                                                            
+            msa_pair_weighted_averaging:                                                            
+              n_heads: 8                                                                            
+              c_weighted_average: 32                                                                
+              c_msa_embed: 64                                                                       
+              c_z: 128                                                                              
+              separate_gate_for_every_channel: true                                                 
+            msa_transition:                                                                         
+              'n': 4                                                                                
+              c: 64                                                                                 
+            triangle_multiplication_outgoing:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_multiplication_incoming:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_attention_starting:                                                            
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            triangle_attention_ending:                                                              
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            pair_transition:                                                                        
+              'n': 4                                                                                
+              c: 128                                                                                
+        diffusion_module:                                                                           
+          sigma_data: 16                                                                            
+          c_token: 768                                                                              
+          f_pred: edm                                                                               
+          diffusion_conditioning:                                                                   
+            c_s_inputs: 449                                                                         
+            c_t_embed: 256                                                                          
+            relative_position_encoding:                                                             
+              r_max: 32                                                                             
+              s_max: 2                                                                              
+          atom_attention_encoder:                                                                   
+            c_tokenpair: 128                                                                        
+            c_atom_1d_features: 393                                                                 
+            use_inv_dist_squared: true                                                              
+            atom_1d_features:                                                                       
+            - ref_pos                                                                               
+            - ref_charge                                                                            
+            - ref_mask                                                                              
+            - ref_element                                                                           
+            - ref_atom_name_chars                                                                   
+            - ref_pos_ground_truth                                                                  
+            - has_atom_level_embedding                                                              
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+            broadcast_trunk_feats_on_1dim_old: false                                                
+            use_chiral_features: true                                                               
+            no_grad_on_chiral_center: false                                                         
+            use_atom_level_embedding: true                                                          
+            atom_level_embedding_dim: 384                                                           
+          diffusion_transformer:                                                                    
+            n_block: 24                                                                             
+            diffusion_transformer_block:                                                            
+              n_head: 16                                                                            
+              no_residual_connection_between_attention_and_transition: true                         
+              kq_norm: true                                                                         
+          atom_attention_decoder:                                                                   
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+        distogram_head:                                                                             
+          bins: 65                                                                                  
+        inference_sampler:                                                                          
+          solver: af3                                                                               
+          num_timesteps: 50                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        mini_rollout_sampler:                                                                       
+          solver: af3                                                                               
+          num_timesteps: 20                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        confidence_head:                                                                            
+          c_s: 384                                                                                  
+          c_z: 128                                                                                  
+          n_pairformer_layers: 4                                                                    
+          pairformer:                                                                               
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          n_bins_pae: 64                                                                            
+          n_bins_pde: 64                                                                            
+          n_bins_plddt: 50                                                                          
+          n_bins_exp_resolved: 2                                                                    
+          use_Cb_distances: false                                                                   
+          use_af3_style_binning_and_final_layer_norms: true                                         
+          symmetrize_Cb_logits: true                                                                
+                                                                                                    
+INFERENCE TRANSFORM PIPELINE
+├── _target_
+│   └── modelhub.data.pipelines.build_af3_transform_pipeline                                        
+├── is_inference
+│   └── True                                                                                        
+├── protein_msa_dirs
+│   └── []                                                                                          
+├── rna_msa_dirs
+│   └── []                                                                                          
+├── n_recycles
+│   └── 10                                                                                          
+├── crop_size
+│   └── None                                                                                        
+├── n_msa
+│   └── 1024                                                                                        
+├── diffusion_batch_size
+│   └── 5                                                                                           
+├── max_atoms_in_crop
+│   └── None                                                                                        
+├── return_atom_array
+│   └── True                                                                                        
+├── run_confidence_head
+│   └── True                                                                                        
+├── p_unconditional
+│   └── 1.0                                                                                         
+├── p_dropout_atom_level_embeddings
+│   └── 0.0                                                                                         
+├── take_first_chiral_subordering
+│   └── False                                                                                       
+├── use_element_for_atom_names_of_atomized_tokens
+│   └── False                                                                                       
+├── raise_if_missing_msa_for_protein_of_length_n
+│   └── None                                                                                        
+├── undesired_res_names
+│   └── []                                                                                          
+├── template_noise_scales
+│   └── atomized: 1.0e-05                                                                           
+│       not_atomized: 1.0e-05                                                                       
+│                                                                                                   
+├── allowed_chain_types_for_conditioning
+│   └── None                                                                                        
+├── p_give_polymer_ref_conf
+│   └── 0.0                                                                                         
+└── p_give_non_polymer_ref_conf
+    └── 0.0                                                                                         
+[27593689,1] Running command #5
+RF3 environment activated!
+Python: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env/bin/python
+Environment: /dtu/projects/dbl/rf3/release/conda_envs/rf3-env
+INFERENCE TRAINER CONFIGURATION
+├── strategy
+│   └── ddp                                                                                         
+├── accelerator
+│   └── gpu                                                                                         
+├── devices_per_node
+│   └── 1                                                                                           
+├── num_nodes
+│   └── 1                                                                                           
+├── loss
+│   └── confidence_loss:                                                                            
+│         _target_: modelhub.loss.af3_confidence_loss.ConfidenceLoss                                
+│         weight: 1.0                                                                               
+│         plddt:                                                                                    
+│           weight: 1.0                                                                             
+│           n_bins: 50                                                                              
+│           max_value: 1.0                                                                          
+│         pae:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         pde:                                                                                      
+│           weight: 1.0                                                                             
+│           n_bins: 64                                                                              
+│           max_value: 32                                                                           
+│         exp_resolved:                                                                             
+│           weight: 1.0                                                                             
+│           n_bins: 2                                                                               
+│           max_value: 1                                                                            
+│         log_statistics: true                                                                      
+│         rank_loss:                                                                                
+│           use_listnet_loss: false                                                                 
+│           weight: 0.0                                                                             
+│                                                                                                   
+├── metrics
+│   └── {}                                                                                          
+│                                                                                                   
+├── _target_
+│   └── modelhub.trainers.rf3.RF3TrainerWithConfidence                                              
+├── validate_every_n_epochs
+│   └── 999                                                                                         
+├── max_epochs
+│   └── 10000                                                                                       
+├── n_examples_per_epoch
+│   └── 12000                                                                                       
+├── prevalidate
+│   └── False                                                                                       
+├── n_recycles_train
+│   └── 4                                                                                           
+├── clip_grad_max_norm
+│   └── 10.0                                                                                        
+├── output_dir
+│   └── /home/dimaio/modelhub/logs/train/af3/2025-07-30_17-25_JOB_198                               
+├── checkpoint_every_n_epochs
+│   └── 1                                                                                           
+├── precision
+│   └── bf16-mixed                                                                                  
+└── grad_accum_steps
+    └── 4                                                                                           
+Adding loss confidence_loss to the loss function
+INFERENCE MODEL CONFIGURATION
+├── optimizer
+│   └── _target_: torch.optim.Adam                                                                  
+│       lr: 0                                                                                       
+│       betas:                                                                                      
+│       - 0.9                                                                                       
+│       - 0.95                                                                                      
+│       eps: 1.0e-08                                                                                
+│                                                                                                   
+├── lr_scheduler
+│   └── _target_: modelhub.training.schedulers.AF3Scheduler                                         
+│       base_lr: 0.0009                                                                             
+│       warmup_steps: 1000                                                                          
+│       decay_factor: 0.95                                                                          
+│       decay_steps: 50000                                                                          
+│                                                                                                   
+├── ema
+│   └── decay: 0.999                                                                                
+│                                                                                                   
+└── net
+    └── _target_: modelhub.model.RF3.RF3WithConfidence                                              
+        c_s: 384                                                                                    
+        c_z: 128                                                                                    
+        c_atom: 128                                                                                 
+        c_atompair: 16                                                                              
+        c_s_inputs: 449                                                                             
+        feature_initializer:                                                                        
+          input_feature_embedder:                                                                   
+            features:                                                                               
+            - restype                                                                               
+            - profile                                                                               
+            - deletion_mean                                                                         
+            atom_attention_encoder:                                                                 
+              c_token: 384                                                                          
+              c_atom_1d_features: 393                                                               
+              c_tokenpair: 128                                                                      
+              use_inv_dist_squared: true                                                            
+              atom_1d_features:                                                                     
+              - ref_pos                                                                             
+              - ref_charge                                                                          
+              - ref_mask                                                                            
+              - ref_element                                                                         
+              - ref_atom_name_chars                                                                 
+              - ref_pos_ground_truth                                                                
+              - has_atom_level_embedding                                                            
+              atom_transformer:                                                                     
+                n_queries: 32                                                                       
+                n_keys: 128                                                                         
+                diffusion_transformer:                                                              
+                  n_block: 3                                                                        
+                  diffusion_transformer_block:                                                      
+                    n_head: 4                                                                       
+                    no_residual_connection_between_attention_and_transition: true                   
+                    kq_norm: true                                                                   
+              use_atom_level_embedding: true                                                        
+              atom_level_embedding_dim: 384                                                         
+          relative_position_encoding:                                                               
+            r_max: 32                                                                               
+            s_max: 2                                                                                
+        recycler:                                                                                   
+          n_pairformer_blocks: 48                                                                   
+          pairformer_block:                                                                         
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          template_embedder:                                                                        
+            n_block: 2                                                                              
+            raw_template_dim: 66                                                                    
+            c: 64                                                                                   
+            p_drop: 0.25                                                                            
+          msa_module:                                                                               
+            n_block: 4                                                                              
+            c_m: 64                                                                                 
+            p_drop_msa: 0.15                                                                        
+            p_drop_pair: 0.25                                                                       
+            msa_subsample_embedder:                                                                 
+              num_sequences: 1024                                                                   
+              dim_raw_msa: 34                                                                       
+              c_s_inputs: 449                                                                       
+              c_msa_embed: 64                                                                       
+            outer_product:                                                                          
+              c_msa_embed: 64                                                                       
+              c_outer_product: 32                                                                   
+              c_out: 128                                                                            
+            msa_pair_weighted_averaging:                                                            
+              n_heads: 8                                                                            
+              c_weighted_average: 32                                                                
+              c_msa_embed: 64                                                                       
+              c_z: 128                                                                              
+              separate_gate_for_every_channel: true                                                 
+            msa_transition:                                                                         
+              'n': 4                                                                                
+              c: 64                                                                                 
+            triangle_multiplication_outgoing:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_multiplication_incoming:                                                       
+              d_pair: 128                                                                           
+              d_hidden: 128                                                                         
+              bias: true                                                                            
+            triangle_attention_starting:                                                            
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            triangle_attention_ending:                                                              
+              d_pair: 128                                                                           
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+              p_drop: 0.0                                                                           
+            pair_transition:                                                                        
+              'n': 4                                                                                
+              c: 128                                                                                
+        diffusion_module:                                                                           
+          sigma_data: 16                                                                            
+          c_token: 768                                                                              
+          f_pred: edm                                                                               
+          diffusion_conditioning:                                                                   
+            c_s_inputs: 449                                                                         
+            c_t_embed: 256                                                                          
+            relative_position_encoding:                                                             
+              r_max: 32                                                                             
+              s_max: 2                                                                              
+          atom_attention_encoder:                                                                   
+            c_tokenpair: 128                                                                        
+            c_atom_1d_features: 393                                                                 
+            use_inv_dist_squared: true                                                              
+            atom_1d_features:                                                                       
+            - ref_pos                                                                               
+            - ref_charge                                                                            
+            - ref_mask                                                                              
+            - ref_element                                                                           
+            - ref_atom_name_chars                                                                   
+            - ref_pos_ground_truth                                                                  
+            - has_atom_level_embedding                                                              
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+            broadcast_trunk_feats_on_1dim_old: false                                                
+            use_chiral_features: true                                                               
+            no_grad_on_chiral_center: false                                                         
+            use_atom_level_embedding: true                                                          
+            atom_level_embedding_dim: 384                                                           
+          diffusion_transformer:                                                                    
+            n_block: 24                                                                             
+            diffusion_transformer_block:                                                            
+              n_head: 16                                                                            
+              no_residual_connection_between_attention_and_transition: true                         
+              kq_norm: true                                                                         
+          atom_attention_decoder:                                                                   
+            atom_transformer:                                                                       
+              n_queries: 32                                                                         
+              n_keys: 128                                                                           
+              diffusion_transformer:                                                                
+                n_block: 3                                                                          
+                diffusion_transformer_block:                                                        
+                  n_head: 4                                                                         
+                  no_residual_connection_between_attention_and_transition: true                     
+                  kq_norm: true                                                                     
+        distogram_head:                                                                             
+          bins: 65                                                                                  
+        inference_sampler:                                                                          
+          solver: af3                                                                               
+          num_timesteps: 50                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        mini_rollout_sampler:                                                                       
+          solver: af3                                                                               
+          num_timesteps: 20                                                                         
+          min_t: 0                                                                                  
+          max_t: 1                                                                                  
+          sigma_data: 16                                                                            
+          s_min: 0.0004                                                                             
+          s_max: 160                                                                                
+          p: 7                                                                                      
+          gamma_0: 0.8                                                                              
+          gamma_min: 1.0                                                                            
+          noise_scale: 1.003                                                                        
+          step_scale: 1.5                                                                           
+        confidence_head:                                                                            
+          c_s: 384                                                                                  
+          c_z: 128                                                                                  
+          n_pairformer_layers: 4                                                                    
+          pairformer:                                                                               
+            p_drop: 0.25                                                                            
+            triangle_multiplication:                                                                
+              d_hidden: 128                                                                         
+            triangle_attention:                                                                     
+              n_head: 4                                                                             
+              d_hidden: 32                                                                          
+            attention_pair_bias:                                                                    
+              n_head: 16                                                                            
+          n_bins_pae: 64                                                                            
+          n_bins_pde: 64                                                                            
+          n_bins_plddt: 50                                                                          
+          n_bins_exp_resolved: 2                                                                    
+          use_Cb_distances: false                                                                   
+          use_af3_style_binning_and_final_layer_norms: true                                         
+          symmetrize_Cb_logits: true                                                                
+                                                                                                    
+INFERENCE TRANSFORM PIPELINE
+├── _target_
+│   └── modelhub.data.pipelines.build_af3_transform_pipeline                                        
+├── is_inference
+│   └── True                                                                                        
+├── protein_msa_dirs
+│   └── []                                                                                          
+├── rna_msa_dirs
+│   └── []                                                                                          
+├── n_recycles
+│   └── 10                                                                                          
+├── crop_size
+│   └── None                                                                                        
+├── n_msa
+│   └── 1024                                                                                        
+├── diffusion_batch_size
+│   └── 5                                                                                           
+├── max_atoms_in_crop
+│   └── None                                                                                        
+├── return_atom_array
+│   └── True                                                                                        
+├── run_confidence_head
+│   └── True                                                                                        
+├── p_unconditional
+│   └── 1.0                                                                                         
+├── p_dropout_atom_level_embeddings
+│   └── 0.0                                                                                         
+├── take_first_chiral_subordering
+│   └── False                                                                                       
+├── use_element_for_atom_names_of_atomized_tokens
+│   └── False                                                                                       
+├── raise_if_missing_msa_for_protein_of_length_n
+│   └── None                                                                                        
+├── undesired_res_names
+│   └── []                                                                                          
+├── template_noise_scales
+│   └── atomized: 1.0e-05                                                                           
+│       not_atomized: 1.0e-05                                                                       
+│                                                                                                   
+├── allowed_chain_types_for_conditioning
+│   └── None                                                                                        
+├── p_give_polymer_ref_conf
+│   └── 0.0                                                                                         
+└── p_give_non_polymer_ref_conf
+    └── 0.0                                                                                         
+Done array index 1.

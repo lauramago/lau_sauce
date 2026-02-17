@@ -1,0 +1,13 @@
+{
+	"name": "test_rf3",
+	"components": [
+		{
+			"seq": "YKVGDIITIDGKRYRVVGRNLEGNYIVQCLDNPNRCAYIKVKDGKIVYAEEFPC",
+			"chain_id": "A"
+		},
+        {
+            "path": "/work3/marhr/Projects/target_structure/PAC1_6M1I/6M1i_edited_3.cif"
+        }
+        ],
+        "template_selection": ["B"]
+}
