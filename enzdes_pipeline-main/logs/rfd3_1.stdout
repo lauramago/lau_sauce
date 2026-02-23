@@ -1,0 +1,2154 @@
+Loaded module: cuda/12.4
+/zhome/a3/8/228951/.lsbatch/1771583254.27868750.1.shell: line 16: ${{MY_PATH}}:{{PYTHON_PATH:-}}: bad substitution
+This is LSF task 1, run number 1
+/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+11:55:31 DEBUG transforms: Debug mode is on
+11:55:34 INFO rfd3.engine: [rank: 0] Outputs will be written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3.
+11:55:34 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory.
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA L40S') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+11:55:51 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+11:55:52 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+11:55:52 ERROR rfd3.inference.input_parsing: [rank: 0] ✗ Failed in validator: load_input
+  Error: [component=B123] Residue B123 not found in atom array.
+  Error type: ComponentValidationError
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/cli.py:43 in design                                                     │
+│                                                                              │
+│   40 │   │   from rfd3.run_inference import run_inference                    │
+│   41 │   │                                                                   │
+│   42 │   │   with suppress_warnings(is_inference=True):                      │
+│ ❱ 43 │   │   │   run_inference(cfg)                                          │
+│   44                                                                         │
+│   45                                                                         │
+│   46 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │                 args = [                                                 │ │
+│ │                        │                                                 │ │
+│ │                        'out_dir=/work3/kiersum/projects/enzyme_design/h… │ │
+│ │                        │                                                 │ │
+│ │                        'inputs=/work3/kiersum/projects/enzyme_design/hy… │ │
+│ │                        │                                                 │ │
+│ │                        'ckpt_path=/dtu/projects/dbl/foundry/ckpt/rfd3_l… │ │
+│ │                        │   'diffusion_batch_size=2',                     │ │
+│ │                        │   'n_batches=10',                               │ │
+│ │                        │   'inference_sampler.step_scale=3',             │ │
+│ │                        │   'inference_sampler.gamma_0=0.2',              │ │
+│ │                        │   'inference_engine=rfdiffusion3'               │ │
+│ │                        ]                                                 │ │
+│ │                  cfg = {'ckpt_path':                                     │ │
+│ │                        '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt… │ │
+│ │                        'num_nodes': 1, 'devices_per_node': 1, 'verbose': │ │
+│ │                        False, 'seed': None, 'inputs':                    │ │
+│ │                        '/work3/kiersum/projects/enzyme_design/hydrolase… │ │
+│ │                        'out_dir':                                        │ │
+│ │                        '/work3/kiersum/projects/enzyme_design/hydrolase… │ │
+│ │                        '_target_': 'rfd3.engine.RFD3InferenceEngine',    │ │
+│ │                        'json_keys_subset': None, 'skip_existing': True,  │ │
+│ │                        'specification': {}, 'diffusion_batch_size': 2,   │ │
+│ │                        'n_batches': 10, 'inference_sampler': {'kind':    │ │
+│ │                        'default', 'cfg_features': ['active_donor',       │ │
+│ │                        'active_acceptor', 'ref_atomwise_rasa'],          │ │
+│ │                        'use_classifier_free_guidance': False,            │ │
+│ │                        'cfg_t_max': None, 'cfg_scale': 1.5,              │ │
+│ │                        'center_option': 'all', 's_trans': 1.0,           │ │
+│ │                        'inference_noise_scaling_factor': 1.0,            │ │
+│ │                        'allow_realignment': False, 'num_timesteps': 200, │ │
+│ │                        'step_scale': 3, 'noise_scale': 1.003, 'p': 7,    │ │
+│ │                        'gamma_0': 0.2, 'gamma_min': 1.0,                 │ │
+│ │                        's_jitter_origin': 0.0}, 'cleanup_guideposts':    │ │
+│ │                        True, 'cleanup_virtual_atoms': True,              │ │
+│ │                        'read_sequence_from_sequence_head': True,         │ │
+│ │                        'output_full_json': True, 'global_prefix': None,  │ │
+│ │                        'dump_prediction_metadata_json': True,            │ │
+│ │                        'dump_trajectories': False,                       │ │
+│ │                        'align_trajectory_structures': False,             │ │
+│ │                        'prevalidate_inputs': False, 'low_memory_mode':   │ │
+│ │                        False}                                            │ │
+│ │          config_path = '/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/… │ │
+│ │                  ctx = <click.core.Context object at 0x7f3b3167c230>     │ │
+│ │      dev_config_path = PosixPath('/dtu/projects/dbl/foundry/miniforge3/… │ │
+│ │ has_inference_engine = False                                             │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ hydra/main.py:83 in decorated_main                                           │
+│                                                                              │
+│    80 │   │   @functools.wraps(task_function)                                │
+│    81 │   │   def decorated_main(cfg_passthrough: Optional[DictConfig] = Non │
+│    82 │   │   │   if cfg_passthrough is not None:                            │
+│ ❱  83 │   │   │   │   return task_function(cfg_passthrough)                  │
+│    84 │   │   │   else:                                                      │
+│    85 │   │   │   │   args_parser = get_args_parser()                        │
+│    86 │   │   │   │   args = args_parser.parse_args()                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ cfg_passthrough = {'ckpt_path':                                          │ │
+│ │                   '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',     │ │
+│ │                   'num_nodes': 1, 'devices_per_node': 1, 'verbose':      │ │
+│ │                   False, 'seed': None, 'inputs':                         │ │
+│ │                   '/work3/kiersum/projects/enzyme_design/hydrolases/ser… │ │
+│ │                   'out_dir':                                             │ │
+│ │                   '/work3/kiersum/projects/enzyme_design/hydrolases/ser… │ │
+│ │                   '_target_': 'rfd3.engine.RFD3InferenceEngine',         │ │
+│ │                   'json_keys_subset': None, 'skip_existing': True,       │ │
+│ │                   'specification': {}, 'diffusion_batch_size': 2,        │ │
+│ │                   'n_batches': 10, 'inference_sampler': {'kind':         │ │
+│ │                   'default', 'cfg_features': ['active_donor',            │ │
+│ │                   'active_acceptor', 'ref_atomwise_rasa'],               │ │
+│ │                   'use_classifier_free_guidance': False, 'cfg_t_max':    │ │
+│ │                   None, 'cfg_scale': 1.5, 'center_option': 'all',        │ │
+│ │                   's_trans': 1.0, 'inference_noise_scaling_factor': 1.0, │ │
+│ │                   'allow_realignment': False, 'num_timesteps': 200,      │ │
+│ │                   'step_scale': 3, 'noise_scale': 1.003, 'p': 7,         │ │
+│ │                   'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':   │ │
+│ │                   0.0}, 'cleanup_guideposts': True,                      │ │
+│ │                   'cleanup_virtual_atoms': True,                         │ │
+│ │                   'read_sequence_from_sequence_head': True,              │ │
+│ │                   'output_full_json': True, 'global_prefix': None,       │ │
+│ │                   'dump_prediction_metadata_json': True,                 │ │
+│ │                   'dump_trajectories': False,                            │ │
+│ │                   'align_trajectory_structures': False,                  │ │
+│ │                   'prevalidate_inputs': False, 'low_memory_mode': False} │ │
+│ │     config_name = 'inference'                                            │ │
+│ │     config_path = '/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/p… │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/run_inference.py:39 in run_inference                                    │
+│                                                                              │
+│   36 │                                                                       │
+│   37 │   # Run                                                               │
+│   38 │   engine = RFD3InferenceEngine(**RFD3InferenceConfig(**init_cfg_dict) │
+│ ❱ 39 │   engine.run(**run_params)                                            │
+│   40                                                                         │
+│   41                                                                         │
+│   42 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │            cfg = {'ckpt_path':                                           │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  'num_nodes': 1, 'devices_per_node': 1, 'verbose':       │ │
+│ │                  False, 'seed': None, 'inputs':                          │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  'out_dir':                                              │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  '_target_': 'rfd3.engine.RFD3InferenceEngine',          │ │
+│ │                  'json_keys_subset': None, 'skip_existing': True,        │ │
+│ │                  'specification': {}, 'diffusion_batch_size': 2,         │ │
+│ │                  'n_batches': 10, 'inference_sampler': {'kind':          │ │
+│ │                  'default', 'cfg_features': ['active_donor',             │ │
+│ │                  'active_acceptor', 'ref_atomwise_rasa'],                │ │
+│ │                  'use_classifier_free_guidance': False, 'cfg_t_max':     │ │
+│ │                  None, 'cfg_scale': 1.5, 'center_option': 'all',         │ │
+│ │                  's_trans': 1.0, 'inference_noise_scaling_factor': 1.0,  │ │
+│ │                  'allow_realignment': False, 'num_timesteps': 200,       │ │
+│ │                  'step_scale': 3, 'noise_scale': 1.003, 'p': 7,          │ │
+│ │                  'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':    │ │
+│ │                  0.0}, 'cleanup_guideposts': True,                       │ │
+│ │                  'cleanup_virtual_atoms': True,                          │ │
+│ │                  'read_sequence_from_sequence_head': True,               │ │
+│ │                  'output_full_json': True, 'global_prefix': None,        │ │
+│ │                  'dump_prediction_metadata_json': True,                  │ │
+│ │                  'dump_trajectories': False,                             │ │
+│ │                  'align_trajectory_structures': False,                   │ │
+│ │                  'prevalidate_inputs': False, 'low_memory_mode': False}  │ │
+│ │       cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'inputs':                                           │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   'out_dir':                                          │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   '_target_': 'rfd3.engine.RFD3InferenceEngine',      │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': True,                              │ │
+│ │                  │   ... +14                                             │ │
+│ │                  }                                                       │ │
+│ │         engine = <rfd3.engine.RFD3InferenceEngine object at              │ │
+│ │                  0x7f39ff92e0c0>                                         │ │
+│ │  init_cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': True,                              │ │
+│ │                  │   'specification': {},                                │ │
+│ │                  │   'diffusion_batch_size': 2,                          │ │
+│ │                  │   'inference_sampler': {                              │ │
+│ │                  │   │   'kind': 'default',                              │ │
+│ │                  │   │   'cfg_features': [                               │ │
+│ │                  │   │   │   'active_donor',                             │ │
+│ │                  │   │   │   'active_acceptor',                          │ │
+│ │                  │   │   │   'ref_atomwise_rasa'                         │ │
+│ │                  │   │   ],                                              │ │
+│ │                  │   │   'use_classifier_free_guidance': False,          │ │
+│ │                  │   │   'cfg_t_max': None,                              │ │
+│ │                  │   │   'cfg_scale': 1.5,                               │ │
+│ │                  │   │   'center_option': 'all',                         │ │
+│ │                  │   │   's_trans': 1.0,                                 │ │
+│ │                  │   │   'inference_noise_scaling_factor': 1.0,          │ │
+│ │                  │   │   'allow_realignment': False,                     │ │
+│ │                  │   │   'num_timesteps': 200,                           │ │
+│ │                  │   │   ... +6                                          │ │
+│ │                  │   },                                                  │ │
+│ │                  │   ... +10                                             │ │
+│ │                  }                                                       │ │
+│ │     run_params = {                                                       │ │
+│ │                  │   'inputs':                                           │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   'out_dir':                                          │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   'n_batches': 10                                     │ │
+│ │                  }                                                       │ │
+│ │ run_params_set = {'n_batches', 'out_dir', 'inputs'}                      │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/engine.py:222 in run                                                    │
+│                                                                              │
+│   219 │   │   )                                                              │
+│   220 │   │   # init before                                                  │
+│   221 │   │   self.initialize()                                              │
+│ ❱ 222 │   │   outputs = self._run_multi(design_specifications)               │
+│   223 │   │   return outputs                                                 │
+│   224 │                                                                      │
+│   225 │   def _set_out_dir(self, out_dir: str | PathLike | None):            │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ design_specifications = {                                                │ │
+│ │                         │   '5XH3_5XH3_0': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_1': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_2': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_3': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_4': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_5': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_6': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_7': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_8': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_9': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │                inputs = {                                                │ │
+│ │                         │   '5XH3_5XH3': {                               │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │             n_batches = 10                                               │ │
+│ │               out_dir = '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                  self = <rfd3.engine.RFD3InferenceEngine object at       │ │
+│ │                         0x7f39ff92e0c0>                                  │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/engine.py:257 in _run_multi                                             │
+│                                                                              │
+│   254 │   │   # Evaluate, using `validation_step`                            │
+│   255 │   │   # ============================================================ │
+│   256 │   │   outputs = {}                                                   │
+│ ❱ 257 │   │   for batch_idx, batch in enumerate(loader):                     │
+│   258 │   │   │   pipeline_output = batch[0]                                 │
+│   259 │   │   │   example_id = pipeline_output["example_id"]                 │
+│   260                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │  loader = <lightning.fabric.wrappers._FabricDataLoader object at         │ │
+│ │           0x7f39fe0b4e60>                                                │ │
+│ │ outputs = {}                                                             │ │
+│ │    self = <rfd3.engine.RFD3InferenceEngine object at 0x7f39ff92e0c0>     │ │
+│ │   specs = {                                                              │ │
+│ │           │   '5XH3_5XH3_0': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_1': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_2': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_3': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_4': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_5': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_6': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_7': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_8': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_9': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   }                                                          │ │
+│ │           }                                                              │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ lightning/fabric/wrappers.py:326 in __iter__                                 │
+│                                                                              │
+│   323 │   │   if self._device is None:                                       │
+│   324 │   │   │   yield from iter(self._dataloader)                          │
+│   325 │   │   else:                                                          │
+│ ❱ 326 │   │   │   for item in self._dataloader:                              │
+│   327 │   │   │   │   yield move_data_to_device(item, self._device)          │
+│   328                                                                        │
+│   329                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ self = <lightning.fabric.wrappers._FabricDataLoader object at            │ │
+│ │        0x7f39fe0b4e60>                                                   │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/dataloader.py:733 in __next__                               │
+│                                                                              │
+│    730 │   │   │   if self._sampler_iter is None:                            │
+│    731 │   │   │   │   # TODO(https://github.com/pytorch/pytorch/issues/7675 │
+│    732 │   │   │   │   self._reset()  # type: ignore[call-arg]               │
+│ ❱  733 │   │   │   data = self._next_data()                                  │
+│    734 │   │   │   self._num_yielded += 1                                    │
+│    735 │   │   │   if (                                                      │
+│    736 │   │   │   │   self._dataset_kind == _DatasetKind.Iterable           │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ self = <torch.utils.data.dataloader._SingleProcessDataLoaderIter object  │ │
+│ │        at 0x7f39fe0b4ec0>                                                │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/dataloader.py:789 in _next_data                             │
+│                                                                              │
+│    786 │                                                                     │
+│    787 │   def _next_data(self):                                             │
+│    788 │   │   index = self._next_index()  # may raise StopIteration         │
+│ ❱  789 │   │   data = self._dataset_fetcher.fetch(index)  # may raise StopIt │
+│    790 │   │   if self._pin_memory:                                          │
+│    791 │   │   │   data = _utils.pin_memory.pin_memory(data, self._pin_memor │
+│    792 │   │   return data                                                   │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ index = [4]                                                              │ │
+│ │  self = <torch.utils.data.dataloader._SingleProcessDataLoaderIter object │ │
+│ │         at 0x7f39fe0b4ec0>                                               │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/_utils/fetch.py:52 in fetch                                 │
+│                                                                              │
+│   49 │   │   │   if hasattr(self.dataset, "__getitems__") and self.dataset._ │
+│   50 │   │   │   │   data = self.dataset.__getitems__(possibly_batched_index │
+│   51 │   │   │   else:                                                       │
+│ ❱ 52 │   │   │   │   data = [self.dataset[idx] for idx in possibly_batched_i │
+│   53 │   │   else:                                                           │
+│   54 │   │   │   data = self.dataset[possibly_batched_index]                 │
+│   55 │   │   return self.collate_fn(data)                                    │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ possibly_batched_index = [4]                                             │ │
+│ │                   self = <torch.utils.data._utils.fetch._MapDatasetFetc… │ │
+│ │                          object at 0x7f39fe0b4b00>                       │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/inference/datasets.py:165 in __getitem__                                │
+│                                                                              │
+│   162 │   │   if not isinstance(spec, DesignInputSpecification):             │
+│   163 │   │   │   spec = ensure_input_is_abspath(spec, self.json_path)       │
+│   164 │   │   │   spec["cif_parser_args"] = self.cif_parser_args             │
+│ ❱ 165 │   │   │   spec = DesignInputSpecification.safe_init(**spec)          │
+│   166 │   │                                                                  │
+│   167 │   │   # Create pipeline input                                        │
+│   168 │   │   data = spec.to_pipeline_input(example_id=example_id)           │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ example_id = '5XH3_5XH3_4'                                               │ │
+│ │        idx = 4                                                           │ │
+│ │       self = <rfd3.inference.datasets.ContigJsonDataset object at        │ │
+│ │              0x7f39fe0b4ef0>                                             │ │
+│ │       spec = {                                                           │ │
+│ │              │   'dialect': 2,                                           │ │
+│ │              │   'input':                                                │ │
+│ │              '/work3/kiersum/projects/enzyme_design/hydrolases/serine_h… │ │
+│ │              │   'contig':                                               │ │
+│ │              '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-… │ │
+│ │              │   'length': '180-250',                                    │ │
+│ │              │   'redesign_motif_sidechains': False,                     │ │
+│ │              │   'is_non_loopy': True,                                   │ │
+│ │              │   'ligand': 'LG1',                                        │ │
+│ │              │   'unindex': 'A131,A177,A208',                            │ │
+│ │              │   'select_fixed_atoms': {                                 │ │
+│ │              │   │   'A131': 'OG,CA,CB',                                 │ │
+│ │              │   │   'A177': 'OD1,OD2,CG',                               │ │
+│ │              │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                        │ │
+│ │              │   },                                                      │ │
+│ │              │   'select_hotspots': 'B123-131',                          │ │
+│ │              │   ... +2                                                  │ │
+│ │              }                                                           │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/inference/input_parsing.py:759 in safe_init                             │
+│                                                                              │
+│    756 │   │   │   logger.warning(warn)                                      │
+│    757 │   │   │   return LegacySpecification(**spec_kwargs)                 │
+│    758 │   │   else:                                                         │
+│ ❱  759 │   │   │   return cls(**spec_kwargs)                                 │
+│    760 │                                                                     │
+│    761 │   def to_pipeline_input(self, example_id):                          │
+│    762 │   │   atom_array, spec_dict = self.build(return_metadata=True)      │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ spec_kwargs = {                                                          │ │
+│ │               │   'dialect': 2,                                          │ │
+│ │               │   'input':                                               │ │
+│ │               '/work3/kiersum/projects/enzyme_design/hydrolases/serine_… │ │
+│ │               │   'contig':                                              │ │
+│ │               '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40… │ │
+│ │               │   'length': '180-250',                                   │ │
+│ │               │   'redesign_motif_sidechains': False,                    │ │
+│ │               │   'is_non_loopy': True,                                  │ │
+│ │               │   'ligand': 'LG1',                                       │ │
+│ │               │   'unindex': 'A131,A177,A208',                           │ │
+│ │               │   'select_fixed_atoms': {                                │ │
+│ │               │   │   'A131': 'OG,CA,CB',                                │ │
+│ │               │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │               │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │               │   },                                                     │ │
+│ │               │   'select_hotspots': 'B123-131',                         │ │
+│ │               │   ... +2                                                 │ │
+│ │               }                                                          │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ pydantic/main.py:250 in __init__                                             │
+│                                                                              │
+│    247 │   │   """                                                           │
+│    248 │   │   # `__tracebackhide__` tells pytest and some other tools to om │
+│    249 │   │   __tracebackhide__ = True                                      │
+│ ❱  250 │   │   validated_self = self.__pydantic_validator__.validate_python( │
+│    251 │   │   if self is not validated_self:                                │
+│    252 │   │   │   warnings.warn(                                            │
+│    253 │   │   │   │   'A custom validator is returning a value other than ` │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ data = {                                                                 │ │
+│ │        │   'dialect': 2,                                                 │ │
+│ │        │   'input':                                                      │ │
+│ │        '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrola… │ │
+│ │        │   'contig': InputSelection(                                     │ │
+│ │        │   │   data={                                                    │ │
+│ │        │   │   │   'A58': ['N', 'CA', 'C', 'O', 'CB'],                   │ │
+│ │        │   │   │   'A131': ['N', 'CA', 'C', 'O', 'CB', 'OG'],            │ │
+│ │        │   │   │   'A132': ['N', 'CA', 'C', 'O', 'CB'],                  │ │
+│ │        │   │   │   'A177': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'OD1',                                            │ │
+│ │        │   │   │   │   'OD2'                                             │ │
+│ │        │   │   │   ],                                                    │ │
+│ │        │   │   │   'A208': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'CD2',                                            │ │
+│ │        │   │   │   │   'ND1',                                            │ │
+│ │        │   │   │   │   'CE1',                                            │ │
+│ │        │   │   │   │   'NE2'                                             │ │
+│ │        │   │   │   ]                                                     │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │                                                             │ │
+│ │        raw='30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60… │ │
+│ │        │   │   mask=array([False, False, False, False, False,  True,     │ │
+│ │        True,  True,  True,                                               │ │
+│ │        │   │   True, False, False, False, False, False,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True,  True,  True,  True,  True,  True,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False,  True,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True,  True,  True,  True, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False]),                                                          │ │
+│ │        │   │   tokens=None                                               │ │
+│ │        │   ),                                                            │ │
+│ │        │   'length': '180-250',                                          │ │
+│ │        │   'redesign_motif_sidechains': False,                           │ │
+│ │        │   'is_non_loopy': True,                                         │ │
+│ │        │   'ligand': 'LG1',                                              │ │
+│ │        │   'unindex': InputSelection(                                    │ │
+│ │        │   │   data={                                                    │ │
+│ │        │   │   │   'A131': ['N', 'CA', 'C', 'O', 'CB', 'OG'],            │ │
+│ │        │   │   │   'A177': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'OD1',                                            │ │
+│ │        │   │   │   │   'OD2'                                             │ │
+│ │        │   │   │   ],                                                    │ │
+│ │        │   │   │   'A208': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'CD2',                                            │ │
+│ │        │   │   │   │   'ND1',                                            │ │
+│ │        │   │   │   │   'CE1',                                            │ │
+│ │        │   │   │   │   'NE2'                                             │ │
+│ │        │   │   │   ]                                                     │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │   raw='A131,A177,A208',                                     │ │
+│ │        │   │   mask=array([False, False, False, False, False, False,     │ │
+│ │        False, False, False,                                              │ │
+│ │        │      False, False, False, False, False, False,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False,  True,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True,  True,  True,  True, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False]),                                                          │ │
+│ │        │   │   tokens=None                                               │ │
+│ │        │   ),                                                            │ │
+│ │        │   'select_fixed_atoms': InputSelection(                         │ │
+│ │        │   │   data={                                                    │ │
+│ │        │   │   │   'A131': ['CA', 'CB', 'OG'],                           │ │
+│ │        │   │   │   'A177': ['CG', 'OD1', 'OD2'],                         │ │
+│ │        │   │   │   'A208': ['CG', 'CD2', 'ND1', 'CE1', 'NE2']            │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │   raw={                                                     │ │
+│ │        │   │   │   'A131': 'OG,CA,CB',                                   │ │
+│ │        │   │   │   'A177': 'OD1,OD2,CG',                                 │ │
+│ │        │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                          │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │   mask=array([False, False, False, False, False, False,     │ │
+│ │        False, False, False,                                              │ │
+│ │        │      False, False, False, False, False, False, False,  True,    │ │
+│ │        False,                                                            │ │
+│ │        │      False,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False,  True,  True,  True,  True,  True, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False]),                                                          │ │
+│ │        │   │   tokens=None                                               │ │
+│ │        │   ),                                                            │ │
+│ │        │   'select_hotspots': 'B123-131',                                │ │
+│ │        │   ... +4                                                        │ │
+│ │        }                                                                 │ │
+│ │ self = DesignInputSpecification()                                        │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+╰──────────────────────────────────────────────────────────────────────────────╯
+ValidationError: 1 validation error for DesignInputSpecification
+  Value error, [component=B123] Residue B123 not found in atom array. 
+[type=value_error, input_value={'dialect': 2, 'input': '...lse, atoms=0, 
+tokens=0)}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error
+Loaded module: cuda/12.4
+/zhome/a3/8/228951/.lsbatch/1771592412.27869454.1.shell: line 16: ${{MY_PATH}}:{{PYTHON_PATH:-}}: bad substitution
+This is LSF task 1, run number 1
+/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+14:10:37 DEBUG transforms: Debug mode is on
+14:10:39 INFO rfd3.engine: [rank: 0] Outputs will be written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3.
+14:10:39 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory.
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA L40S') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+14:10:57 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+14:10:58 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+14:10:58 ERROR rfd3.inference.input_parsing: [rank: 0] ✗ Failed in validator: load_input
+  Error: [component=B123] Residue B123 not found in atom array.
+  Error type: ComponentValidationError
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/cli.py:43 in design                                                     │
+│                                                                              │
+│   40 │   │   from rfd3.run_inference import run_inference                    │
+│   41 │   │                                                                   │
+│   42 │   │   with suppress_warnings(is_inference=True):                      │
+│ ❱ 43 │   │   │   run_inference(cfg)                                          │
+│   44                                                                         │
+│   45                                                                         │
+│   46 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │                 args = [                                                 │ │
+│ │                        │                                                 │ │
+│ │                        'out_dir=/work3/kiersum/projects/enzyme_design/h… │ │
+│ │                        │                                                 │ │
+│ │                        'inputs=/work3/kiersum/projects/enzyme_design/hy… │ │
+│ │                        │                                                 │ │
+│ │                        'ckpt_path=/dtu/projects/dbl/foundry/ckpt/rfd3_l… │ │
+│ │                        │   'diffusion_batch_size=2',                     │ │
+│ │                        │   'n_batches=10',                               │ │
+│ │                        │   'inference_sampler.step_scale=3',             │ │
+│ │                        │   'inference_sampler.gamma_0=0.2',              │ │
+│ │                        │   'inference_engine=rfdiffusion3'               │ │
+│ │                        ]                                                 │ │
+│ │                  cfg = {'ckpt_path':                                     │ │
+│ │                        '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt… │ │
+│ │                        'num_nodes': 1, 'devices_per_node': 1, 'verbose': │ │
+│ │                        False, 'seed': None, 'inputs':                    │ │
+│ │                        '/work3/kiersum/projects/enzyme_design/hydrolase… │ │
+│ │                        'out_dir':                                        │ │
+│ │                        '/work3/kiersum/projects/enzyme_design/hydrolase… │ │
+│ │                        '_target_': 'rfd3.engine.RFD3InferenceEngine',    │ │
+│ │                        'json_keys_subset': None, 'skip_existing': True,  │ │
+│ │                        'specification': {}, 'diffusion_batch_size': 2,   │ │
+│ │                        'n_batches': 10, 'inference_sampler': {'kind':    │ │
+│ │                        'default', 'cfg_features': ['active_donor',       │ │
+│ │                        'active_acceptor', 'ref_atomwise_rasa'],          │ │
+│ │                        'use_classifier_free_guidance': False,            │ │
+│ │                        'cfg_t_max': None, 'cfg_scale': 1.5,              │ │
+│ │                        'center_option': 'all', 's_trans': 1.0,           │ │
+│ │                        'inference_noise_scaling_factor': 1.0,            │ │
+│ │                        'allow_realignment': False, 'num_timesteps': 200, │ │
+│ │                        'step_scale': 3, 'noise_scale': 1.003, 'p': 7,    │ │
+│ │                        'gamma_0': 0.2, 'gamma_min': 1.0,                 │ │
+│ │                        's_jitter_origin': 0.0}, 'cleanup_guideposts':    │ │
+│ │                        True, 'cleanup_virtual_atoms': True,              │ │
+│ │                        'read_sequence_from_sequence_head': True,         │ │
+│ │                        'output_full_json': True, 'global_prefix': None,  │ │
+│ │                        'dump_prediction_metadata_json': True,            │ │
+│ │                        'dump_trajectories': False,                       │ │
+│ │                        'align_trajectory_structures': False,             │ │
+│ │                        'prevalidate_inputs': False, 'low_memory_mode':   │ │
+│ │                        False}                                            │ │
+│ │          config_path = '/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/… │ │
+│ │                  ctx = <click.core.Context object at 0x7fb7181ff740>     │ │
+│ │      dev_config_path = PosixPath('/dtu/projects/dbl/foundry/miniforge3/… │ │
+│ │ has_inference_engine = False                                             │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ hydra/main.py:83 in decorated_main                                           │
+│                                                                              │
+│    80 │   │   @functools.wraps(task_function)                                │
+│    81 │   │   def decorated_main(cfg_passthrough: Optional[DictConfig] = Non │
+│    82 │   │   │   if cfg_passthrough is not None:                            │
+│ ❱  83 │   │   │   │   return task_function(cfg_passthrough)                  │
+│    84 │   │   │   else:                                                      │
+│    85 │   │   │   │   args_parser = get_args_parser()                        │
+│    86 │   │   │   │   args = args_parser.parse_args()                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ cfg_passthrough = {'ckpt_path':                                          │ │
+│ │                   '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',     │ │
+│ │                   'num_nodes': 1, 'devices_per_node': 1, 'verbose':      │ │
+│ │                   False, 'seed': None, 'inputs':                         │ │
+│ │                   '/work3/kiersum/projects/enzyme_design/hydrolases/ser… │ │
+│ │                   'out_dir':                                             │ │
+│ │                   '/work3/kiersum/projects/enzyme_design/hydrolases/ser… │ │
+│ │                   '_target_': 'rfd3.engine.RFD3InferenceEngine',         │ │
+│ │                   'json_keys_subset': None, 'skip_existing': True,       │ │
+│ │                   'specification': {}, 'diffusion_batch_size': 2,        │ │
+│ │                   'n_batches': 10, 'inference_sampler': {'kind':         │ │
+│ │                   'default', 'cfg_features': ['active_donor',            │ │
+│ │                   'active_acceptor', 'ref_atomwise_rasa'],               │ │
+│ │                   'use_classifier_free_guidance': False, 'cfg_t_max':    │ │
+│ │                   None, 'cfg_scale': 1.5, 'center_option': 'all',        │ │
+│ │                   's_trans': 1.0, 'inference_noise_scaling_factor': 1.0, │ │
+│ │                   'allow_realignment': False, 'num_timesteps': 200,      │ │
+│ │                   'step_scale': 3, 'noise_scale': 1.003, 'p': 7,         │ │
+│ │                   'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':   │ │
+│ │                   0.0}, 'cleanup_guideposts': True,                      │ │
+│ │                   'cleanup_virtual_atoms': True,                         │ │
+│ │                   'read_sequence_from_sequence_head': True,              │ │
+│ │                   'output_full_json': True, 'global_prefix': None,       │ │
+│ │                   'dump_prediction_metadata_json': True,                 │ │
+│ │                   'dump_trajectories': False,                            │ │
+│ │                   'align_trajectory_structures': False,                  │ │
+│ │                   'prevalidate_inputs': False, 'low_memory_mode': False} │ │
+│ │     config_name = 'inference'                                            │ │
+│ │     config_path = '/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/p… │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/run_inference.py:39 in run_inference                                    │
+│                                                                              │
+│   36 │                                                                       │
+│   37 │   # Run                                                               │
+│   38 │   engine = RFD3InferenceEngine(**RFD3InferenceConfig(**init_cfg_dict) │
+│ ❱ 39 │   engine.run(**run_params)                                            │
+│   40                                                                         │
+│   41                                                                         │
+│   42 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │            cfg = {'ckpt_path':                                           │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  'num_nodes': 1, 'devices_per_node': 1, 'verbose':       │ │
+│ │                  False, 'seed': None, 'inputs':                          │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  'out_dir':                                              │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  '_target_': 'rfd3.engine.RFD3InferenceEngine',          │ │
+│ │                  'json_keys_subset': None, 'skip_existing': True,        │ │
+│ │                  'specification': {}, 'diffusion_batch_size': 2,         │ │
+│ │                  'n_batches': 10, 'inference_sampler': {'kind':          │ │
+│ │                  'default', 'cfg_features': ['active_donor',             │ │
+│ │                  'active_acceptor', 'ref_atomwise_rasa'],                │ │
+│ │                  'use_classifier_free_guidance': False, 'cfg_t_max':     │ │
+│ │                  None, 'cfg_scale': 1.5, 'center_option': 'all',         │ │
+│ │                  's_trans': 1.0, 'inference_noise_scaling_factor': 1.0,  │ │
+│ │                  'allow_realignment': False, 'num_timesteps': 200,       │ │
+│ │                  'step_scale': 3, 'noise_scale': 1.003, 'p': 7,          │ │
+│ │                  'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':    │ │
+│ │                  0.0}, 'cleanup_guideposts': True,                       │ │
+│ │                  'cleanup_virtual_atoms': True,                          │ │
+│ │                  'read_sequence_from_sequence_head': True,               │ │
+│ │                  'output_full_json': True, 'global_prefix': None,        │ │
+│ │                  'dump_prediction_metadata_json': True,                  │ │
+│ │                  'dump_trajectories': False,                             │ │
+│ │                  'align_trajectory_structures': False,                   │ │
+│ │                  'prevalidate_inputs': False, 'low_memory_mode': False}  │ │
+│ │       cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'inputs':                                           │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   'out_dir':                                          │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   '_target_': 'rfd3.engine.RFD3InferenceEngine',      │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': True,                              │ │
+│ │                  │   ... +14                                             │ │
+│ │                  }                                                       │ │
+│ │         engine = <rfd3.engine.RFD3InferenceEngine object at              │ │
+│ │                  0x7fb5e6b7fec0>                                         │ │
+│ │  init_cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': True,                              │ │
+│ │                  │   'specification': {},                                │ │
+│ │                  │   'diffusion_batch_size': 2,                          │ │
+│ │                  │   'inference_sampler': {                              │ │
+│ │                  │   │   'kind': 'default',                              │ │
+│ │                  │   │   'cfg_features': [                               │ │
+│ │                  │   │   │   'active_donor',                             │ │
+│ │                  │   │   │   'active_acceptor',                          │ │
+│ │                  │   │   │   'ref_atomwise_rasa'                         │ │
+│ │                  │   │   ],                                              │ │
+│ │                  │   │   'use_classifier_free_guidance': False,          │ │
+│ │                  │   │   'cfg_t_max': None,                              │ │
+│ │                  │   │   'cfg_scale': 1.5,                               │ │
+│ │                  │   │   'center_option': 'all',                         │ │
+│ │                  │   │   's_trans': 1.0,                                 │ │
+│ │                  │   │   'inference_noise_scaling_factor': 1.0,          │ │
+│ │                  │   │   'allow_realignment': False,                     │ │
+│ │                  │   │   'num_timesteps': 200,                           │ │
+│ │                  │   │   ... +6                                          │ │
+│ │                  │   },                                                  │ │
+│ │                  │   ... +10                                             │ │
+│ │                  }                                                       │ │
+│ │     run_params = {                                                       │ │
+│ │                  │   'inputs':                                           │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   'out_dir':                                          │ │
+│ │                  '/work3/kiersum/projects/enzyme_design/hydrolases/seri… │ │
+│ │                  │   'n_batches': 10                                     │ │
+│ │                  }                                                       │ │
+│ │ run_params_set = {'n_batches', 'out_dir', 'inputs'}                      │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/engine.py:222 in run                                                    │
+│                                                                              │
+│   219 │   │   )                                                              │
+│   220 │   │   # init before                                                  │
+│   221 │   │   self.initialize()                                              │
+│ ❱ 222 │   │   outputs = self._run_multi(design_specifications)               │
+│   223 │   │   return outputs                                                 │
+│   224 │                                                                      │
+│   225 │   def _set_out_dir(self, out_dir: str | PathLike | None):            │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ design_specifications = {                                                │ │
+│ │                         │   '5XH3_5XH3_0': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_1': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_2': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_3': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_4': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_5': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_6': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_7': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_8': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   '5XH3_5XH3_9': {                             │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │                inputs = {                                                │ │
+│ │                         │   '5XH3_5XH3': {                               │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-… │ │
+│ │                         │   │   'length': '180-250',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'ligand': 'LG1',                         │ │
+│ │                         │   │   'unindex': 'A131,A177,A208',             │ │
+│ │                         │   │   'select_fixed_atoms': {                  │ │
+│ │                         │   │   │   'A131': 'OG,CA,CB',                  │ │
+│ │                         │   │   │   'A177': 'OD1,OD2,CG',                │ │
+│ │                         │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'         │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'select_hotspots': 'B123-131',           │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │             n_batches = 10                                               │ │
+│ │               out_dir = '/work3/kiersum/projects/enzyme_design/hydrolas… │ │
+│ │                  self = <rfd3.engine.RFD3InferenceEngine object at       │ │
+│ │                         0x7fb5e6b7fec0>                                  │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/engine.py:257 in _run_multi                                             │
+│                                                                              │
+│   254 │   │   # Evaluate, using `validation_step`                            │
+│   255 │   │   # ============================================================ │
+│   256 │   │   outputs = {}                                                   │
+│ ❱ 257 │   │   for batch_idx, batch in enumerate(loader):                     │
+│   258 │   │   │   pipeline_output = batch[0]                                 │
+│   259 │   │   │   example_id = pipeline_output["example_id"]                 │
+│   260                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │  loader = <lightning.fabric.wrappers._FabricDataLoader object at         │ │
+│ │           0x7fb5e4548a10>                                                │ │
+│ │ outputs = {}                                                             │ │
+│ │    self = <rfd3.engine.RFD3InferenceEngine object at 0x7fb5e6b7fec0>     │ │
+│ │   specs = {                                                              │ │
+│ │           │   '5XH3_5XH3_0': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_1': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_2': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_3': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_4': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_5': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_6': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_7': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_8': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   '5XH3_5XH3_9': {                                           │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydr… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60', │ │
+│ │           │   │   'length': '180-250',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'is_non_loopy': True,                                  │ │
+│ │           │   │   'ligand': 'LG1',                                       │ │
+│ │           │   │   'unindex': 'A131,A177,A208',                           │ │
+│ │           │   │   'select_fixed_atoms': {                                │ │
+│ │           │   │   │   'A131': 'OG,CA,CB',                                │ │
+│ │           │   │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │           │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │           │   │   },                                                     │ │
+│ │           │   │   'select_hotspots': 'B123-131',                         │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   }                                                          │ │
+│ │           }                                                              │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ lightning/fabric/wrappers.py:326 in __iter__                                 │
+│                                                                              │
+│   323 │   │   if self._device is None:                                       │
+│   324 │   │   │   yield from iter(self._dataloader)                          │
+│   325 │   │   else:                                                          │
+│ ❱ 326 │   │   │   for item in self._dataloader:                              │
+│   327 │   │   │   │   yield move_data_to_device(item, self._device)          │
+│   328                                                                        │
+│   329                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ self = <lightning.fabric.wrappers._FabricDataLoader object at            │ │
+│ │        0x7fb5e4548a10>                                                   │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/dataloader.py:733 in __next__                               │
+│                                                                              │
+│    730 │   │   │   if self._sampler_iter is None:                            │
+│    731 │   │   │   │   # TODO(https://github.com/pytorch/pytorch/issues/7675 │
+│    732 │   │   │   │   self._reset()  # type: ignore[call-arg]               │
+│ ❱  733 │   │   │   data = self._next_data()                                  │
+│    734 │   │   │   self._num_yielded += 1                                    │
+│    735 │   │   │   if (                                                      │
+│    736 │   │   │   │   self._dataset_kind == _DatasetKind.Iterable           │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ self = <torch.utils.data.dataloader._SingleProcessDataLoaderIter object  │ │
+│ │        at 0x7fb5e4548a70>                                                │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/dataloader.py:789 in _next_data                             │
+│                                                                              │
+│    786 │                                                                     │
+│    787 │   def _next_data(self):                                             │
+│    788 │   │   index = self._next_index()  # may raise StopIteration         │
+│ ❱  789 │   │   data = self._dataset_fetcher.fetch(index)  # may raise StopIt │
+│    790 │   │   if self._pin_memory:                                          │
+│    791 │   │   │   data = _utils.pin_memory.pin_memory(data, self._pin_memor │
+│    792 │   │   return data                                                   │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ index = [4]                                                              │ │
+│ │  self = <torch.utils.data.dataloader._SingleProcessDataLoaderIter object │ │
+│ │         at 0x7fb5e4548a70>                                               │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/_utils/fetch.py:52 in fetch                                 │
+│                                                                              │
+│   49 │   │   │   if hasattr(self.dataset, "__getitems__") and self.dataset._ │
+│   50 │   │   │   │   data = self.dataset.__getitems__(possibly_batched_index │
+│   51 │   │   │   else:                                                       │
+│ ❱ 52 │   │   │   │   data = [self.dataset[idx] for idx in possibly_batched_i │
+│   53 │   │   else:                                                           │
+│   54 │   │   │   data = self.dataset[possibly_batched_index]                 │
+│   55 │   │   return self.collate_fn(data)                                    │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ possibly_batched_index = [4]                                             │ │
+│ │                   self = <torch.utils.data._utils.fetch._MapDatasetFetc… │ │
+│ │                          object at 0x7fb5e4548620>                       │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/inference/datasets.py:165 in __getitem__                                │
+│                                                                              │
+│   162 │   │   if not isinstance(spec, DesignInputSpecification):             │
+│   163 │   │   │   spec = ensure_input_is_abspath(spec, self.json_path)       │
+│   164 │   │   │   spec["cif_parser_args"] = self.cif_parser_args             │
+│ ❱ 165 │   │   │   spec = DesignInputSpecification.safe_init(**spec)          │
+│   166 │   │                                                                  │
+│   167 │   │   # Create pipeline input                                        │
+│   168 │   │   data = spec.to_pipeline_input(example_id=example_id)           │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ example_id = '5XH3_5XH3_4'                                               │ │
+│ │        idx = 4                                                           │ │
+│ │       self = <rfd3.inference.datasets.ContigJsonDataset object at        │ │
+│ │              0x7fb5e4548aa0>                                             │ │
+│ │       spec = {                                                           │ │
+│ │              │   'dialect': 2,                                           │ │
+│ │              │   'input':                                                │ │
+│ │              '/work3/kiersum/projects/enzyme_design/hydrolases/serine_h… │ │
+│ │              │   'contig':                                               │ │
+│ │              '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-… │ │
+│ │              │   'length': '180-250',                                    │ │
+│ │              │   'redesign_motif_sidechains': False,                     │ │
+│ │              │   'is_non_loopy': True,                                   │ │
+│ │              │   'ligand': 'LG1',                                        │ │
+│ │              │   'unindex': 'A131,A177,A208',                            │ │
+│ │              │   'select_fixed_atoms': {                                 │ │
+│ │              │   │   'A131': 'OG,CA,CB',                                 │ │
+│ │              │   │   'A177': 'OD1,OD2,CG',                               │ │
+│ │              │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                        │ │
+│ │              │   },                                                      │ │
+│ │              │   'select_hotspots': 'B123-131',                          │ │
+│ │              │   ... +2                                                  │ │
+│ │              }                                                           │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/inference/input_parsing.py:759 in safe_init                             │
+│                                                                              │
+│    756 │   │   │   logger.warning(warn)                                      │
+│    757 │   │   │   return LegacySpecification(**spec_kwargs)                 │
+│    758 │   │   else:                                                         │
+│ ❱  759 │   │   │   return cls(**spec_kwargs)                                 │
+│    760 │                                                                     │
+│    761 │   def to_pipeline_input(self, example_id):                          │
+│    762 │   │   atom_array, spec_dict = self.build(return_metadata=True)      │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ spec_kwargs = {                                                          │ │
+│ │               │   'dialect': 2,                                          │ │
+│ │               │   'input':                                               │ │
+│ │               '/work3/kiersum/projects/enzyme_design/hydrolases/serine_… │ │
+│ │               │   'contig':                                              │ │
+│ │               '30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40… │ │
+│ │               │   'length': '180-250',                                   │ │
+│ │               │   'redesign_motif_sidechains': False,                    │ │
+│ │               │   'is_non_loopy': True,                                  │ │
+│ │               │   'ligand': 'LG1',                                       │ │
+│ │               │   'unindex': 'A131,A177,A208',                           │ │
+│ │               │   'select_fixed_atoms': {                                │ │
+│ │               │   │   'A131': 'OG,CA,CB',                                │ │
+│ │               │   │   'A177': 'OD1,OD2,CG',                              │ │
+│ │               │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                       │ │
+│ │               │   },                                                     │ │
+│ │               │   'select_hotspots': 'B123-131',                         │ │
+│ │               │   ... +2                                                 │ │
+│ │               }                                                          │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ pydantic/main.py:250 in __init__                                             │
+│                                                                              │
+│    247 │   │   """                                                           │
+│    248 │   │   # `__tracebackhide__` tells pytest and some other tools to om │
+│    249 │   │   __tracebackhide__ = True                                      │
+│ ❱  250 │   │   validated_self = self.__pydantic_validator__.validate_python( │
+│    251 │   │   if self is not validated_self:                                │
+│    252 │   │   │   warnings.warn(                                            │
+│    253 │   │   │   │   'A custom validator is returning a value other than ` │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ data = {                                                                 │ │
+│ │        │   'dialect': 2,                                                 │ │
+│ │        │   'input':                                                      │ │
+│ │        '/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrola… │ │
+│ │        │   'contig': InputSelection(                                     │ │
+│ │        │   │   data={                                                    │ │
+│ │        │   │   │   'A58': ['N', 'CA', 'C', 'O', 'CB'],                   │ │
+│ │        │   │   │   'A131': ['N', 'CA', 'C', 'O', 'CB', 'OG'],            │ │
+│ │        │   │   │   'A132': ['N', 'CA', 'C', 'O', 'CB'],                  │ │
+│ │        │   │   │   'A177': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'OD1',                                            │ │
+│ │        │   │   │   │   'OD2'                                             │ │
+│ │        │   │   │   ],                                                    │ │
+│ │        │   │   │   'A208': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'CD2',                                            │ │
+│ │        │   │   │   │   'ND1',                                            │ │
+│ │        │   │   │   │   'CE1',                                            │ │
+│ │        │   │   │   │   'NE2'                                             │ │
+│ │        │   │   │   ]                                                     │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │                                                             │ │
+│ │        raw='30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60… │ │
+│ │        │   │   mask=array([False, False, False, False, False,  True,     │ │
+│ │        True,  True,  True,                                               │ │
+│ │        │   │   True, False, False, False, False, False,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True,  True,  True,  True,  True,  True,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False,  True,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True,  True,  True,  True, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False]),                                                          │ │
+│ │        │   │   tokens=None                                               │ │
+│ │        │   ),                                                            │ │
+│ │        │   'length': '180-250',                                          │ │
+│ │        │   'redesign_motif_sidechains': False,                           │ │
+│ │        │   'is_non_loopy': True,                                         │ │
+│ │        │   'ligand': 'LG1',                                              │ │
+│ │        │   'unindex': InputSelection(                                    │ │
+│ │        │   │   data={                                                    │ │
+│ │        │   │   │   'A131': ['N', 'CA', 'C', 'O', 'CB', 'OG'],            │ │
+│ │        │   │   │   'A177': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'OD1',                                            │ │
+│ │        │   │   │   │   'OD2'                                             │ │
+│ │        │   │   │   ],                                                    │ │
+│ │        │   │   │   'A208': [                                             │ │
+│ │        │   │   │   │   'N',                                              │ │
+│ │        │   │   │   │   'CA',                                             │ │
+│ │        │   │   │   │   'C',                                              │ │
+│ │        │   │   │   │   'O',                                              │ │
+│ │        │   │   │   │   'CB',                                             │ │
+│ │        │   │   │   │   'CG',                                             │ │
+│ │        │   │   │   │   'CD2',                                            │ │
+│ │        │   │   │   │   'ND1',                                            │ │
+│ │        │   │   │   │   'CE1',                                            │ │
+│ │        │   │   │   │   'NE2'                                             │ │
+│ │        │   │   │   ]                                                     │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │   raw='A131,A177,A208',                                     │ │
+│ │        │   │   mask=array([False, False, False, False, False, False,     │ │
+│ │        False, False, False,                                              │ │
+│ │        │      False, False, False, False, False, False,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False,  True,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False,  True,  True,  True,    │ │
+│ │        True,                                                             │ │
+│ │        │   │   True,  True,  True,  True,  True,  True, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False]),                                                          │ │
+│ │        │   │   tokens=None                                               │ │
+│ │        │   ),                                                            │ │
+│ │        │   'select_fixed_atoms': InputSelection(                         │ │
+│ │        │   │   data={                                                    │ │
+│ │        │   │   │   'A131': ['CA', 'CB', 'OG'],                           │ │
+│ │        │   │   │   'A177': ['CG', 'OD1', 'OD2'],                         │ │
+│ │        │   │   │   'A208': ['CG', 'CD2', 'ND1', 'CE1', 'NE2']            │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │   raw={                                                     │ │
+│ │        │   │   │   'A131': 'OG,CA,CB',                                   │ │
+│ │        │   │   │   'A177': 'OD1,OD2,CG',                                 │ │
+│ │        │   │   │   'A208': 'NE2,ND1,CE1,CD2,CG'                          │ │
+│ │        │   │   },                                                        │ │
+│ │        │   │   mask=array([False, False, False, False, False, False,     │ │
+│ │        False, False, False,                                              │ │
+│ │        │      False, False, False, False, False, False, False,  True,    │ │
+│ │        False,                                                            │ │
+│ │        │      False,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │   │   True,  True,  True, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False,  True,  True,  True,  True,  True, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False,                                                            │ │
+│ │        │      False, False, False, False, False, False, False, False,    │ │
+│ │        False]),                                                          │ │
+│ │        │   │   tokens=None                                               │ │
+│ │        │   ),                                                            │ │
+│ │        │   'select_hotspots': 'B123-131',                                │ │
+│ │        │   ... +4                                                        │ │
+│ │        }                                                                 │ │
+│ │ self = DesignInputSpecification()                                        │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+╰──────────────────────────────────────────────────────────────────────────────╯
+ValidationError: 1 validation error for DesignInputSpecification
+  Value error, [component=B123] Residue B123 not found in atom array. 
+[type=value_error, input_value={'dialect': 2, 'input': '...lse, atoms=0, 
+tokens=0)}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error
+Loaded module: cuda/12.4
+/zhome/a3/8/228951/.lsbatch/1771595284.27869658.1.shell: line 16: ${{MY_PATH}}:{{PYTHON_PATH:-}}: bad substitution
+This is LSF task 1, run number 1
+/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+15:31:28 DEBUG transforms: Debug mode is on
+15:31:30 INFO rfd3.engine: [rank: 0] Outputs will be written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3.
+15:31:30 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory.
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA L40S') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+15:31:38 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:31:38 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:31:38 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:38 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:31:39 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:31:41 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:32:12 INFO rfd3.engine: [rank: 0] Finished inference batch in 31.46 seconds.
+15:32:12 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_4_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_4_model_0.
+15:32:12 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_4_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_4_model_1.
+15:32:12 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:32:12 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:32:12 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:13 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:32:15 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:32:48 INFO rfd3.engine: [rank: 0] Finished inference batch in 33.33 seconds.
+15:32:48 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_1_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_1_model_0.
+15:32:48 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_1_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_1_model_1.
+15:32:48 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:32:48 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:32:49 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:32:49 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:32:51 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:33:22 INFO rfd3.engine: [rank: 0] Finished inference batch in 30.97 seconds.
+15:33:22 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_7_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_7_model_0.
+15:33:22 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_7_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_7_model_1.
+15:33:22 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:33:22 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:33:22 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:22 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:23 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:23 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:23 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:23 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:23 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:23 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:33:25 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:33:57 INFO rfd3.engine: [rank: 0] Finished inference batch in 31.81 seconds.
+15:33:57 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_5_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_5_model_0.
+15:33:57 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_5_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_5_model_1.
+15:33:57 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:33:57 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:33:57 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:33:57 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:33:59 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:34:27 INFO rfd3.engine: [rank: 0] Finished inference batch in 27.62 seconds.
+15:34:27 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_3_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_3_model_0.
+15:34:27 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_3_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_3_model_1.
+15:34:27 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:34:27 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:34:27 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:27 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:28 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:34:30 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:34:58 INFO rfd3.engine: [rank: 0] Finished inference batch in 28.44 seconds.
+15:34:58 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_9_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_9_model_0.
+15:34:58 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_9_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_9_model_1.
+15:34:58 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:34:58 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:34:58 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:34:59 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:35:01 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:35:33 INFO rfd3.engine: [rank: 0] Finished inference batch in 32.09 seconds.
+15:35:33 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_0_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_0_model_0.
+15:35:33 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_0_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_0_model_1.
+15:35:33 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:35:33 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:35:33 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:33 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:35:34 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:35:36 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:36:04 INFO rfd3.engine: [rank: 0] Finished inference batch in 27.81 seconds.
+15:36:04 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_8_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_8_model_0.
+15:36:04 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_8_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_8_model_1.
+15:36:04 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:36:04 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:36:04 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:04 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:36:06 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:36:36 INFO rfd3.engine: [rank: 0] Finished inference batch in 29.27 seconds.
+15:36:36 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_6_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_6_model_0.
+15:36:36 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_6_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_6_model_1.
+15:36:36 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:36:36 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as B.
+15:36:36 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.io.tools.rdkit: Encountered BondType.ANY. Interpreting as single bond.
+15:36:36 WARNING atomworks.ml.transforms.rdkit_utils: Initial conformer generation based on distance geometry failed. Successful: 0. Falling back to generating a conformer starting from random coordinates.
+15:36:38 WARNING atomworks.ml.transforms.rdkit_utils: Failed to generate 1 conformers for pt1. Falling back to zeros.
+15:37:08 INFO rfd3.engine: [rank: 0] Finished inference batch in 29.49 seconds.
+15:37:08 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_2_model_0 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_2_model_0.
+15:37:08 INFO rfd3.engine: [rank: 0] Outputs for 5XH3_5XH3_2_model_1 written to /work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/diffusion_out/5XH3/5XH3_5XH3_2_model_1.

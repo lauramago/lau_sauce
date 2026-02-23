@@ -1,0 +1,16 @@
+{
+    "5XH3": {
+        "dialect": 2,
+        "input": "/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/inputs/5XH3.pdb",
+        "contig": "30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60",
+        "length": "180-250",
+        "redesign_motif_sidechains": false,
+        "is_non_loopy": true,
+        "ligand": "pt1",
+        "select_fixed_atoms": {
+            "A131": "OG,CA,CB",
+            "A177": "OD1,OD2,CG",
+            "A208": "NE2,ND1,CE1,CD2,CG"
+        }
+    }
+}

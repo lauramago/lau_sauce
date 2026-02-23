@@ -1,0 +1,122 @@
+[
+    {
+        "name": "5XH3_5XH3_9_model_0_1",
+        "components": [
+            {
+                "seq": "AAAAARAAALAAGLTEEEADAVAKGIANPGAGLALAEAALAAARAAVAANPGLPAALRAALLANAAAVLALAALSSLTSGGGGAVLAVRHLELGKNDVAKAVAAAMAADAPHADAAIAATAAALEALTRDHDLARATALLATAAANLAIHNATTGAACAAAEAAMTPAEVAAAWALAVVLAALATARERAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_2",
+        "components": [
+            {
+                "seq": "MAEAARAAALAAGLTEAEAEAVALGVAAPGLGLALAERLLAAARAAVAATPDAPAALRAALLGNAALVLALAALSSLTSGGGGAVFAVMHIAAGKNDVAAAVAAAMAADAPFAVAAVAAAAEALRALEEDRDLAAATALAALAAAALAIHNAITGAAVAAAAAAMTPAEVAAAIALAVALAAAATAAARAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_3",
+        "components": [
+            {
+                "seq": "LAEAARAAALAAGLTEAEAEAVALGIAAPGLGLALAAAVLEAARAAVAAHPDAPADLKAALLDAAARVLALSALSSLLSGGGGAVLAVRHIEAGKHDVAAAVAAAMAADAPFADAAVADAAAALRALTEDHDLARATALLARAAADLEKHNAGTGAACAAAEAALTPEEVAAARALAVVLAALATAAAAAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_4",
+        "components": [
+            {
+                "seq": "MAEAARAAALAAGLSDAQADAVAKGIAAPGLGLALAERALEAARAAVAANPDAPPELRAALLGAAEATLALAALSSLTSGGGGAVLAVRAIEAGKHDVAAAVAAAMAADAPAADAAVAATAAALEALERDRDLAAATALLRAAADALAAHNATTGAACAAAEAALTPEERAAAWALAVALAAAATAAARAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_5",
+        "components": [
+            {
+                "seq": "LAAAARAAARAAGLTDEEAAAVAAGIAAPGLGLALAERALAAAEAAVAANPDAPADLKAALLGNAAATLALAALNSLLSGGGGAVLAVKAIEAGKHDVAAAVAAAMAADAPAADAAVANTAAALRALEEDHDLAAATALLAAAAAALAAHNATTGAACAAAAAAMSAEELAEAIAAAIVLAALYTAAARAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_6",
+        "components": [
+            {
+                "seq": "AAEAARAAALAAGLTDAEADAVARGVAAPGFGLALARRLLEAAEAAVAANPDAPAELKARVLENARRVLELKILSSLLSGGGGAVLAVTCIDAGKHDVAAAVAAAMAADAPAADAANAAAAEALRALERDHDLEKAAELAARAAAALAVHNATTGAACAAAAAALSAAEVAAAVAAAVVLAAVATAAAAAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_7",
+        "components": [
+            {
+                "seq": "LAAAAEAAARAAGLTDAEAAAVAAGIAAPGAGLALAALVLEAAEAAVAATPDAPADLKAALLGNARAVLALAALSSLTSGGGGAVFAVRCIEAGQNDVAAAVAAAMAADAPDADAAIANAAAALTALTRDRDLARATELLAAAAAALAKHNATTGAAVAAAAAAMTPAQVAAALAAAVALAAAATAAAAAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_8",
+        "components": [
+            {
+                "seq": "AAEAARAAALAAGLTEEEAEAVARGVAAPGLGLALAAALLAAARAAVAANPDAPAALKAALLAAAAAVLALSVLSSLLSGGGGAVLAVRHIALGKNDVAAAVAAAMAADAPAADAAVAAAAAALRALTEDHDLARATALAAAAAAALAAHNATTGAACAAAVAAMTPAEVAAAIAAALALSAAATAAAAAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_9",
+        "components": [
+            {
+                "seq": "AAAAARAAALAAGLTEEEAAAVAAGVANPGAGVALAAAALAAARAAVAANPDLPADLKAALLGAAALVLALSILNSLLSGGGGAVLAVRCLEAGKHDVAAAVAAAMAADAPAADAAIAATAAALRALTDDHDLAAATALLAAAAAALAVHNAGTGAACAAAEAALTPEERAAAWAAAIAGALAATAAALAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    },
+    {
+        "name": "5XH3_5XH3_9_model_0_10",
+        "components": [
+            {
+                "seq": "AAAAAEAAAKAAGMTDAEAAAVAAGIAAPGAGLALAAALLAAAEAAVAANPGAPAALRAALLGNAAAVLALSALSSLLSGGGGAVLAVKLIELGKNDEAKAVAAAMAADAPAADAAIAAAAAALTALTEARDLAAATELAAAAAAALAVHNAGTGAACAAAEAALTPEEVAEARALAVVLAAAYTAAAAAALAA",
+                "chain_id": "A"
+            },
+            {
+                "smiles": "COC(=O)c1ccc(C(=O)OCCO)cc1"
+            }
+        ]
+    }
+]

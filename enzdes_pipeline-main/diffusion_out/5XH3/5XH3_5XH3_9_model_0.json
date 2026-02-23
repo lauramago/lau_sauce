@@ -1,0 +1,62 @@
+{
+    "diffused_index_map": {
+        "A58": "A31",
+        "A131": "A79",
+        "A132": "A80",
+        "A177": "A109",
+        "A208": "A150"
+    },
+    "metrics": {
+        "max_ca_deviation": 0.12323164939880371,
+        "n_chainbreaks": 0,
+        "n_clashing.interresidue_clashes_w_sidechain": 0,
+        "n_clashing.interresidue_clashes_w_backbone": 0,
+        "n_clashing.ligand_clashes": 0,
+        "n_clashing.ligand_min_distance": 3.6760129928588867,
+        "non_loop_fraction": 0.8586387434554974,
+        "loop_fraction": 0.14136125654450263,
+        "helix_fraction": 0.8586387434554974,
+        "sheet_fraction": 0.0,
+        "num_ss_elements": 8,
+        "radius_of_gyration": 17.98789143567108,
+        "alanine_content": 0.6649484536082474,
+        "glycine_content": 0.03608247422680412,
+        "num_residues": 194,
+        "diffused_com": [
+            -0.003038839204236865,
+            2.9573450088500977,
+            -3.5458221435546875
+        ],
+        "fixed_com": [
+            0.0005806587869301438,
+            -0.0002771326107904315,
+            0.0009765625
+        ]
+    },
+    "specification": {
+        "input": "/work3/kiersum/projects/enzyme_design/hydrolases/serine_hydrolase/rd1/inputs/5XH3.pdb",
+        "contig": "30-50,A58-58,40-60,A131-132,20-40,A177-177,20-40,A208,40-60",
+        "length": "180-250",
+        "ligand": "pt1",
+        "extra": {
+            "example": "5XH3",
+            "task_name": "5XH3_5XH3",
+            "sampled_contig": "30,A58,47,A131,A132,28,A177,40,A208,44",
+            "num_tokens_in": 195,
+            "num_residues_in": 195,
+            "num_chains": 2,
+            "num_atoms": 995,
+            "num_residues": 197,
+            "example_id": "5XH3_5XH3_9"
+        },
+        "select_fixed_atoms": {
+            "A131": "OG,CA,CB",
+            "A177": "OD1,OD2,CG",
+            "A208": "NE2,ND1,CE1,CD2,CG"
+        },
+        "select_unfixed_sequence": false,
+        "is_non_loopy": true
+    },
+    "ckpt_path": "/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt",
+    "seed": null
+}
