@@ -1,0 +1,497 @@
+Loaded module: cuda/12.4
+/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+15:45:39 DEBUG transforms: Debug mode is on
+15:45:42 INFO rfd3.engine: [rank: 0] Outputs will be written to /work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/diffusion_out.
+15:45:42 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory (0 total).
+Using bfloat16 Automatic Mixed Precision (AMP)
+15:46:19 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:46:19 WARNING atomworks.io: Chain A contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as D.
+15:46:19 WARNING atomworks.io: Chain B contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as E.
+15:46:19 WARNING atomworks.io: Chain C contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as F.
+15:46:19 WARNING atomworks.io: Chain I contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as G.
+15:46:19 WARNING atomworks.io: Chain J contains both polymer and non-polymer residues; separating them for processing, naming the non-polymer residues as H.
+15:46:20 ERROR rfd3.inference.input_parsing: [rank: 0] ✗ Failed in validator: load_input
+  Error: [component=D1] Residue D1 not found in atom array.
+  Error type: ComponentValidationError
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/cli.py:43 in design                                                     │
+│                                                                              │
+│   40 │   │   from rfd3.run_inference import run_inference                    │
+│   41 │   │                                                                   │
+│   42 │   │   with suppress_warnings(is_inference=True):                      │
+│ ❱ 43 │   │   │   run_inference(cfg)                                          │
+│   44                                                                         │
+│   45                                                                         │
+│   46 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │                 args = [                                                 │ │
+│ │                        │                                                 │ │
+│ │                        'out_dir=/work3/laugon/desktop/TCR_designs/tcr_c… │ │
+│ │                        │                                                 │ │
+│ │                        'inputs=/work3/laugon/desktop/TCR_designs/tcr_cd… │ │
+│ │                        │                                                 │ │
+│ │                        'ckpt_path=/dtu/projects/dbl/foundry/ckpt/rfd3_l… │ │
+│ │                        │   'diffusion_batch_size=2',                     │ │
+│ │                        │   'n_batches=2',                                │ │
+│ │                        │   'inference_sampler.step_scale=3',             │ │
+│ │                        │   'inference_sampler.gamma_0=0.2',              │ │
+│ │                        │   'inference_engine=rfdiffusion3'               │ │
+│ │                        ]                                                 │ │
+│ │                  cfg = {'ckpt_path':                                     │ │
+│ │                        '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt… │ │
+│ │                        'num_nodes': 1, 'devices_per_node': 1, 'verbose': │ │
+│ │                        False, 'seed': None, 'inputs':                    │ │
+│ │                        '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_… │ │
+│ │                        'out_dir':                                        │ │
+│ │                        '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_… │ │
+│ │                        '_target_': 'rfd3.engine.RFD3InferenceEngine',    │ │
+│ │                        'json_keys_subset': None, 'skip_existing': True,  │ │
+│ │                        'specification': {}, 'diffusion_batch_size': 2,   │ │
+│ │                        'n_batches': 2, 'inference_sampler': {'kind':     │ │
+│ │                        'default', 'cfg_features': ['active_donor',       │ │
+│ │                        'active_acceptor', 'ref_atomwise_rasa'],          │ │
+│ │                        'use_classifier_free_guidance': False,            │ │
+│ │                        'cfg_t_max': None, 'cfg_scale': 1.5,              │ │
+│ │                        'center_option': 'all', 's_trans': 1.0,           │ │
+│ │                        'inference_noise_scaling_factor': 1.0,            │ │
+│ │                        'allow_realignment': False, 'num_timesteps': 200, │ │
+│ │                        'step_scale': 3, 'noise_scale': 1.003, 'p': 7,    │ │
+│ │                        'gamma_0': 0.2, 'gamma_min': 1.0,                 │ │
+│ │                        's_jitter_origin': 0.0}, 'cleanup_guideposts':    │ │
+│ │                        True, 'cleanup_virtual_atoms': True,              │ │
+│ │                        'read_sequence_from_sequence_head': True,         │ │
+│ │                        'output_full_json': True, 'global_prefix': None,  │ │
+│ │                        'dump_prediction_metadata_json': True,            │ │
+│ │                        'dump_trajectories': False,                       │ │
+│ │                        'align_trajectory_structures': False,             │ │
+│ │                        'prevalidate_inputs': False, 'low_memory_mode':   │ │
+│ │                        False}                                            │ │
+│ │          config_path = '/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/… │ │
+│ │                  ctx = <click.core.Context object at 0x7fcd71af07a0>     │ │
+│ │      dev_config_path = PosixPath('/dtu/projects/dbl/foundry/miniforge3/… │ │
+│ │ has_inference_engine = False                                             │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ hydra/main.py:83 in decorated_main                                           │
+│                                                                              │
+│    80 │   │   @functools.wraps(task_function)                                │
+│    81 │   │   def decorated_main(cfg_passthrough: Optional[DictConfig] = Non │
+│    82 │   │   │   if cfg_passthrough is not None:                            │
+│ ❱  83 │   │   │   │   return task_function(cfg_passthrough)                  │
+│    84 │   │   │   else:                                                      │
+│    85 │   │   │   │   args_parser = get_args_parser()                        │
+│    86 │   │   │   │   args = args_parser.parse_args()                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ cfg_passthrough = {'ckpt_path':                                          │ │
+│ │                   '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',     │ │
+│ │                   'num_nodes': 1, 'devices_per_node': 1, 'verbose':      │ │
+│ │                   False, 'seed': None, 'inputs':                         │ │
+│ │                   '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/co… │ │
+│ │                   'out_dir':                                             │ │
+│ │                   '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/di… │ │
+│ │                   '_target_': 'rfd3.engine.RFD3InferenceEngine',         │ │
+│ │                   'json_keys_subset': None, 'skip_existing': True,       │ │
+│ │                   'specification': {}, 'diffusion_batch_size': 2,        │ │
+│ │                   'n_batches': 2, 'inference_sampler': {'kind':          │ │
+│ │                   'default', 'cfg_features': ['active_donor',            │ │
+│ │                   'active_acceptor', 'ref_atomwise_rasa'],               │ │
+│ │                   'use_classifier_free_guidance': False, 'cfg_t_max':    │ │
+│ │                   None, 'cfg_scale': 1.5, 'center_option': 'all',        │ │
+│ │                   's_trans': 1.0, 'inference_noise_scaling_factor': 1.0, │ │
+│ │                   'allow_realignment': False, 'num_timesteps': 200,      │ │
+│ │                   'step_scale': 3, 'noise_scale': 1.003, 'p': 7,         │ │
+│ │                   'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':   │ │
+│ │                   0.0}, 'cleanup_guideposts': True,                      │ │
+│ │                   'cleanup_virtual_atoms': True,                         │ │
+│ │                   'read_sequence_from_sequence_head': True,              │ │
+│ │                   'output_full_json': True, 'global_prefix': None,       │ │
+│ │                   'dump_prediction_metadata_json': True,                 │ │
+│ │                   'dump_trajectories': False,                            │ │
+│ │                   'align_trajectory_structures': False,                  │ │
+│ │                   'prevalidate_inputs': False, 'low_memory_mode': False} │ │
+│ │     config_name = 'inference'                                            │ │
+│ │     config_path = '/dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/p… │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/run_inference.py:39 in run_inference                                    │
+│                                                                              │
+│   36 │                                                                       │
+│   37 │   # Run                                                               │
+│   38 │   engine = RFD3InferenceEngine(**RFD3InferenceConfig(**init_cfg_dict) │
+│ ❱ 39 │   engine.run(**run_params)                                            │
+│   40                                                                         │
+│   41                                                                         │
+│   42 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │            cfg = {'ckpt_path':                                           │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  'num_nodes': 1, 'devices_per_node': 1, 'verbose':       │ │
+│ │                  False, 'seed': None, 'inputs':                          │ │
+│ │                  '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/con… │ │
+│ │                  'out_dir':                                              │ │
+│ │                  '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/dif… │ │
+│ │                  '_target_': 'rfd3.engine.RFD3InferenceEngine',          │ │
+│ │                  'json_keys_subset': None, 'skip_existing': True,        │ │
+│ │                  'specification': {}, 'diffusion_batch_size': 2,         │ │
+│ │                  'n_batches': 2, 'inference_sampler': {'kind':           │ │
+│ │                  'default', 'cfg_features': ['active_donor',             │ │
+│ │                  'active_acceptor', 'ref_atomwise_rasa'],                │ │
+│ │                  'use_classifier_free_guidance': False, 'cfg_t_max':     │ │
+│ │                  None, 'cfg_scale': 1.5, 'center_option': 'all',         │ │
+│ │                  's_trans': 1.0, 'inference_noise_scaling_factor': 1.0,  │ │
+│ │                  'allow_realignment': False, 'num_timesteps': 200,       │ │
+│ │                  'step_scale': 3, 'noise_scale': 1.003, 'p': 7,          │ │
+│ │                  'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':    │ │
+│ │                  0.0}, 'cleanup_guideposts': True,                       │ │
+│ │                  'cleanup_virtual_atoms': True,                          │ │
+│ │                  'read_sequence_from_sequence_head': True,               │ │
+│ │                  'output_full_json': True, 'global_prefix': None,        │ │
+│ │                  'dump_prediction_metadata_json': True,                  │ │
+│ │                  'dump_trajectories': False,                             │ │
+│ │                  'align_trajectory_structures': False,                   │ │
+│ │                  'prevalidate_inputs': False, 'low_memory_mode': False}  │ │
+│ │       cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'inputs':                                           │ │
+│ │                  '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/con… │ │
+│ │                  │   'out_dir':                                          │ │
+│ │                  '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/dif… │ │
+│ │                  │   '_target_': 'rfd3.engine.RFD3InferenceEngine',      │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': True,                              │ │
+│ │                  │   ... +14                                             │ │
+│ │                  }                                                       │ │
+│ │         engine = <rfd3.engine.RFD3InferenceEngine object at              │ │
+│ │                  0x7fcd71b53fe0>                                         │ │
+│ │  init_cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt',      │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': True,                              │ │
+│ │                  │   'specification': {},                                │ │
+│ │                  │   'diffusion_batch_size': 2,                          │ │
+│ │                  │   'inference_sampler': {                              │ │
+│ │                  │   │   'kind': 'default',                              │ │
+│ │                  │   │   'cfg_features': [                               │ │
+│ │                  │   │   │   'active_donor',                             │ │
+│ │                  │   │   │   'active_acceptor',                          │ │
+│ │                  │   │   │   'ref_atomwise_rasa'                         │ │
+│ │                  │   │   ],                                              │ │
+│ │                  │   │   'use_classifier_free_guidance': False,          │ │
+│ │                  │   │   'cfg_t_max': None,                              │ │
+│ │                  │   │   'cfg_scale': 1.5,                               │ │
+│ │                  │   │   'center_option': 'all',                         │ │
+│ │                  │   │   's_trans': 1.0,                                 │ │
+│ │                  │   │   'inference_noise_scaling_factor': 1.0,          │ │
+│ │                  │   │   'allow_realignment': False,                     │ │
+│ │                  │   │   'num_timesteps': 200,                           │ │
+│ │                  │   │   ... +6                                          │ │
+│ │                  │   },                                                  │ │
+│ │                  │   ... +10                                             │ │
+│ │                  }                                                       │ │
+│ │     run_params = {                                                       │ │
+│ │                  │   'inputs':                                           │ │
+│ │                  '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/con… │ │
+│ │                  │   'out_dir':                                          │ │
+│ │                  '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/dif… │ │
+│ │                  │   'n_batches': 2                                      │ │
+│ │                  }                                                       │ │
+│ │ run_params_set = {'n_batches', 'out_dir', 'inputs'}                      │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/engine.py:226 in run                                                    │
+│                                                                              │
+│   223 │   │   )                                                              │
+│   224 │   │   # init before                                                  │
+│   225 │   │   self.initialize()                                              │
+│ ❱ 226 │   │   outputs = self._run_multi(design_specifications)               │
+│   227 │   │   return outputs                                                 │
+│   228 │                                                                      │
+│   229 │   def _set_out_dir(self, out_dir: str | PathLike | None):            │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ design_specifications = {                                                │ │
+│ │                         │   'TCR_CDR3ab_rfd3_TCR_CDR3ab_rfd3_0': {       │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0… │ │
+│ │                         │   │   'length': '829-837',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'select_hotspots': ['A4', 'A5', 'A6'],   │ │
+│ │                         │   │   'select_hbond_donor': {},                │ │
+│ │                         │   │   'select_hbond_acceptor': {},             │ │
+│ │                         │   │   'infer_ori_strategy': 'hotspots',        │ │
+│ │                         │   │   'is_non_loopy': False,                   │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   },                                           │ │
+│ │                         │   'TCR_CDR3ab_rfd3_TCR_CDR3ab_rfd3_1': {       │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0… │ │
+│ │                         │   │   'length': '829-837',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'select_hotspots': ['A4', 'A5', 'A6'],   │ │
+│ │                         │   │   'select_hbond_donor': {},                │ │
+│ │                         │   │   'select_hbond_acceptor': {},             │ │
+│ │                         │   │   'infer_ori_strategy': 'hotspots',        │ │
+│ │                         │   │   'is_non_loopy': False,                   │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │                inputs = {                                                │ │
+│ │                         │   'TCR_CDR3ab_rfd3_TCR_CDR3ab_rfd3': {         │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp… │ │
+│ │                         │   │   'contig':                                │ │
+│ │                         'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0… │ │
+│ │                         │   │   'length': '829-837',                     │ │
+│ │                         │   │   'redesign_motif_sidechains': False,      │ │
+│ │                         │   │   'select_hotspots': ['A4', 'A5', 'A6'],   │ │
+│ │                         │   │   'select_hbond_donor': {},                │ │
+│ │                         │   │   'select_hbond_acceptor': {},             │ │
+│ │                         │   │   'infer_ori_strategy': 'hotspots',        │ │
+│ │                         │   │   'is_non_loopy': False,                   │ │
+│ │                         │   │   ... +2                                   │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │             n_batches = 2                                                │ │
+│ │               out_dir = '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp… │ │
+│ │                  self = <rfd3.engine.RFD3InferenceEngine object at       │ │
+│ │                         0x7fcd71b53fe0>                                  │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/engine.py:261 in _run_multi                                             │
+│                                                                              │
+│   258 │   │   # Evaluate, using `validation_step`                            │
+│   259 │   │   # ============================================================ │
+│   260 │   │   outputs = {}                                                   │
+│ ❱ 261 │   │   for batch_idx, batch in enumerate(loader):                     │
+│   262 │   │   │   pipeline_output = batch[0]                                 │
+│   263 │   │   │   example_id = pipeline_output["example_id"]                 │
+│   264                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │  loader = <lightning.fabric.wrappers._FabricDataLoader object at         │ │
+│ │           0x7fcc3e9c6060>                                                │ │
+│ │ outputs = {}                                                             │ │
+│ │    self = <rfd3.engine.RFD3InferenceEngine object at 0x7fcd71b53fe0>     │ │
+│ │   specs = {                                                              │ │
+│ │           │   'TCR_CDR3ab_rfd3_TCR_CDR3ab_rfd3_0': {                     │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/inputs/5TE… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0,A1-9,/0,B1-27… │ │
+│ │           │   │   'length': '829-837',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'select_hotspots': ['A4', 'A5', 'A6'],                 │ │
+│ │           │   │   'select_hbond_donor': {},                              │ │
+│ │           │   │   'select_hbond_acceptor': {},                           │ │
+│ │           │   │   'infer_ori_strategy': 'hotspots',                      │ │
+│ │           │   │   'is_non_loopy': False,                                 │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   },                                                         │ │
+│ │           │   'TCR_CDR3ab_rfd3_TCR_CDR3ab_rfd3_1': {                     │ │
+│ │           │   │   'dialect': 2,                                          │ │
+│ │           │   │   'input':                                               │ │
+│ │           '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/inputs/5TE… │ │
+│ │           │   │   'contig':                                              │ │
+│ │           'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0,A1-9,/0,B1-27… │ │
+│ │           │   │   'length': '829-837',                                   │ │
+│ │           │   │   'redesign_motif_sidechains': False,                    │ │
+│ │           │   │   'select_hotspots': ['A4', 'A5', 'A6'],                 │ │
+│ │           │   │   'select_hbond_donor': {},                              │ │
+│ │           │   │   'select_hbond_acceptor': {},                           │ │
+│ │           │   │   'infer_ori_strategy': 'hotspots',                      │ │
+│ │           │   │   'is_non_loopy': False,                                 │ │
+│ │           │   │   ... +2                                                 │ │
+│ │           │   }                                                          │ │
+│ │           }                                                              │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ lightning/fabric/wrappers.py:326 in __iter__                                 │
+│                                                                              │
+│   323 │   │   if self._device is None:                                       │
+│   324 │   │   │   yield from iter(self._dataloader)                          │
+│   325 │   │   else:                                                          │
+│ ❱ 326 │   │   │   for item in self._dataloader:                              │
+│   327 │   │   │   │   yield move_data_to_device(item, self._device)          │
+│   328                                                                        │
+│   329                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ self = <lightning.fabric.wrappers._FabricDataLoader object at            │ │
+│ │        0x7fcc3e9c6060>                                                   │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/dataloader.py:733 in __next__                               │
+│                                                                              │
+│    730 │   │   │   if self._sampler_iter is None:                            │
+│    731 │   │   │   │   # TODO(https://github.com/pytorch/pytorch/issues/7675 │
+│    732 │   │   │   │   self._reset()  # type: ignore[call-arg]               │
+│ ❱  733 │   │   │   data = self._next_data()                                  │
+│    734 │   │   │   self._num_yielded += 1                                    │
+│    735 │   │   │   if (                                                      │
+│    736 │   │   │   │   self._dataset_kind == _DatasetKind.Iterable           │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ self = <torch.utils.data.dataloader._SingleProcessDataLoaderIter object  │ │
+│ │        at 0x7fcc3ecd4bf0>                                                │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/dataloader.py:789 in _next_data                             │
+│                                                                              │
+│    786 │                                                                     │
+│    787 │   def _next_data(self):                                             │
+│    788 │   │   index = self._next_index()  # may raise StopIteration         │
+│ ❱  789 │   │   data = self._dataset_fetcher.fetch(index)  # may raise StopIt │
+│    790 │   │   if self._pin_memory:                                          │
+│    791 │   │   │   data = _utils.pin_memory.pin_memory(data, self._pin_memor │
+│    792 │   │   return data                                                   │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ index = [0]                                                              │ │
+│ │  self = <torch.utils.data.dataloader._SingleProcessDataLoaderIter object │ │
+│ │         at 0x7fcc3ecd4bf0>                                               │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ torch/utils/data/_utils/fetch.py:52 in fetch                                 │
+│                                                                              │
+│   49 │   │   │   if hasattr(self.dataset, "__getitems__") and self.dataset._ │
+│   50 │   │   │   │   data = self.dataset.__getitems__(possibly_batched_index │
+│   51 │   │   │   else:                                                       │
+│ ❱ 52 │   │   │   │   data = [self.dataset[idx] for idx in possibly_batched_i │
+│   53 │   │   else:                                                           │
+│   54 │   │   │   data = self.dataset[possibly_batched_index]                 │
+│   55 │   │   return self.collate_fn(data)                                    │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ possibly_batched_index = [0]                                             │ │
+│ │                   self = <torch.utils.data._utils.fetch._MapDatasetFetc… │ │
+│ │                          object at 0x7fcc3ee1c830>                       │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/inference/datasets.py:165 in __getitem__                                │
+│                                                                              │
+│   162 │   │   if not isinstance(spec, DesignInputSpecification):             │
+│   163 │   │   │   spec = ensure_input_is_abspath(spec, self.json_path)       │
+│   164 │   │   │   spec["cif_parser_args"] = self.cif_parser_args             │
+│ ❱ 165 │   │   │   spec = DesignInputSpecification.safe_init(**spec)          │
+│   166 │   │                                                                  │
+│   167 │   │   # Create pipeline input                                        │
+│   168 │   │   data = spec.to_pipeline_input(example_id=example_id)           │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ example_id = 'TCR_CDR3ab_rfd3_TCR_CDR3ab_rfd3_0'                         │ │
+│ │        idx = 0                                                           │ │
+│ │       self = <rfd3.inference.datasets.ContigJsonDataset object at        │ │
+│ │              0x7fcc3ece9100>                                             │ │
+│ │       spec = {                                                           │ │
+│ │              │   'dialect': 2,                                           │ │
+│ │              │   'input':                                                │ │
+│ │              '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/inputs/… │ │
+│ │              │   'contig':                                               │ │
+│ │              'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0,A1-9,/0,B1… │ │
+│ │              │   'length': '829-837',                                    │ │
+│ │              │   'redesign_motif_sidechains': False,                     │ │
+│ │              │   'select_hotspots': ['A4', 'A5', 'A6'],                  │ │
+│ │              │   'select_hbond_donor': {},                               │ │
+│ │              │   'select_hbond_acceptor': {},                            │ │
+│ │              │   'infer_ori_strategy': 'hotspots',                       │ │
+│ │              │   'is_non_loopy': False,                                  │ │
+│ │              │   ... +2                                                  │ │
+│ │              }                                                           │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ rfd3/inference/input_parsing.py:782 in safe_init                             │
+│                                                                              │
+│    779 │   │   │   logger.warning(warn)                                      │
+│    780 │   │   │   return LegacySpecification(**spec_kwargs)                 │
+│    781 │   │   else:                                                         │
+│ ❱  782 │   │   │   return cls(**spec_kwargs)                                 │
+│    783 │                                                                     │
+│    784 │   def to_pipeline_input(self, example_id):                          │
+│    785 │   │   atom_array, spec_dict = self.build(return_metadata=True)      │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ spec_kwargs = {                                                          │ │
+│ │               │   'dialect': 2,                                          │ │
+│ │               │   'input':                                               │ │
+│ │               '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/inputs… │ │
+│ │               │   'contig':                                              │ │
+│ │               'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0,A1-9,/0,B… │ │
+│ │               │   'length': '829-837',                                   │ │
+│ │               │   'redesign_motif_sidechains': False,                    │ │
+│ │               │   'select_hotspots': ['A4', 'A5', 'A6'],                 │ │
+│ │               │   'select_hbond_donor': {},                              │ │
+│ │               │   'select_hbond_acceptor': {},                           │ │
+│ │               │   'infer_ori_strategy': 'hotspots',                      │ │
+│ │               │   'is_non_loopy': False,                                 │ │
+│ │               │   ... +2                                                 │ │
+│ │               }                                                          │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /dtu/projects/dbl/foundry/miniforge3/envs/rfd3/lib/python3.12/site-packages/ │
+│ pydantic/main.py:250 in __init__                                             │
+│                                                                              │
+│    247 │   │   """                                                           │
+│    248 │   │   # `__tracebackhide__` tells pytest and some other tools to om │
+│    249 │   │   __tracebackhide__ = True                                      │
+│ ❱  250 │   │   validated_self = self.__pydantic_validator__.validate_python( │
+│    251 │   │   if self is not validated_self:                                │
+│    252 │   │   │   warnings.warn(                                            │
+│    253 │   │   │   │   'A custom validator is returning a value other than ` │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ data = {                                                                 │ │
+│ │        │   'dialect': 2,                                                 │ │
+│ │        │   'input':                                                      │ │
+│ │        '/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/inputs/5TEZ.p… │ │
+│ │        │   'contig':                                                     │ │
+│ │        'D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0,A1-9,/0,B1-275,/… │ │
+│ │        │   'length': '829-837',                                          │ │
+│ │        │   'redesign_motif_sidechains': False,                           │ │
+│ │        │   'select_hotspots': ['A4', 'A5', 'A6'],                        │ │
+│ │        │   'select_hbond_donor': {},                                     │ │
+│ │        │   'select_hbond_acceptor': {},                                  │ │
+│ │        │   'infer_ori_strategy': 'hotspots',                             │ │
+│ │        │   'is_non_loopy': False,                                        │ │
+│ │        │   ... +5                                                        │ │
+│ │        }                                                                 │ │
+│ │ self = DesignInputSpecification()                                        │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+╰──────────────────────────────────────────────────────────────────────────────╯
+ValidationError: 1 validation error for DesignInputSpecification
+  Value error, [component=D1] Residue D1 not found in atom array. 
+[type=value_error, input_value={'dialect': 2, 'input': '...lse, atoms=0, 
+tokens=0)}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/value_error

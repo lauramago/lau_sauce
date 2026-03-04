@@ -1,0 +1,77 @@
+Output directory: /work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/diffusion_out
+Completed at Tue Mar  3 14:39:09 CET 2026
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@hpc.dtu.dk>
+Subject: Job 27940822: <rfd3> in cluster <dcc> Done
+
+Job <rfd3> was submitted from host <gbarlogin1> by user <laugon> in cluster <dcc> at Tue Mar  3 14:38:28 2026
+Job was executed on host(s) <4*n-62-11-15>, in queue <gpuv100>, as user <laugon> in cluster <dcc> at Tue Mar  3 14:38:29 2026
+</zhome/d4/7/164691> was used as the home directory.
+</work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/submit> was used as the working directory.
+Started at Tue Mar  3 14:38:29 2026
+Terminated at Tue Mar  3 14:39:09 2026
+Results reported at Tue Mar  3 14:39:09 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/sh
+#BSUB -q gpuv100
+#BSUB -J rfd3
+#BSUB -n 4
+#BSUB -gpu "num=1:mode=exclusive_process"
+#BSUB -W 12:00
+#BSUB -R "rusage[mem=10GB]"
+#BSUB -R "span[hosts=1]"
+#BSUB -o /work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/logs/%J.out
+#BSUB -e /work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/logs/%J.err
+
+mkdir -p /work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/logs
+module load cuda/12.4
+source /dtu/projects/dbl/foundry/miniforge3/etc/profile.d/conda.sh
+conda activate /dtu/projects/dbl/foundry/miniforge3/envs/rfd3
+
+export RFD3_PATH="/dtu/projects/dbl/foundry"
+export PYTHONPATH="${RFD3_PATH}:${PYTHONPATH:-}"
+
+mkdir -p "/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/diffusion_out"
+echo "Output directory: /work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/diffusion_out"
+
+rfd3 design \
+    out_dir="/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/diffusion_out" \
+    inputs="/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/configs/TCR_CDR3ab_rfd3.json" \
+    ckpt_path="/dtu/projects/dbl/foundry/ckpt/rfd3_latest.ckpt" \
+    diffusion_batch_size=2 \
+    n_batches=2 \
+    inference_sampler.step_scale=3 \
+    inference_sampler.gamma_0=0.2
+
+echo "Completed at $(date)"
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   27.00 sec.
+    Max Memory :                                 4495 MB
+    Average Memory :                             3232.00 MB
+    Total Requested Memory :                     40960.00 MB
+    Delta Memory :                               36465.00 MB
+    Max Swap :                                   -
+    Max Processes :                              4
+    Max Threads :                                9
+    Run time :                                   40 sec.
+    Turnaround time :                            41 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/logs/27940822.err> for stderr output of this job.
+

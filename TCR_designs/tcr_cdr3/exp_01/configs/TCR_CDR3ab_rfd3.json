@@ -1,0 +1,18 @@
+{
+    "TCR_CDR3ab_rfd3": {
+        "dialect": 2,
+        "input": "/work3/laugon/desktop/TCR_designs/tcr_cdr3/exp_01/inputs/5TEZ.pdb",
+        "contig": "D1-90,11-15,D105-208,/0,E1-90,9-13,E103-243,/0,A1-9,/0,B1-275,/0,C1-100",
+        "length": "829-837",
+        "redesign_motif_sidechains": false,
+        "select_hotspots": [
+            "A4",
+            "A5",
+            "A6"
+        ],
+        "select_hbond_donor": {},
+        "select_hbond_acceptor": {},
+        "infer_ori_strategy": "hotspots",
+        "is_non_loopy": false
+    }
+}
